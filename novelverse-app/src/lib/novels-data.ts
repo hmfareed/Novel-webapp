@@ -1,7 +1,7 @@
 import type { SeedNovel } from "./seed-data";
 
 export const FULL_CATALOG_NOVELS: SeedNovel[] = [
-  // 1. AFRICAN STORIES & EPIC HEROISM
+  // 1. AFRICAN STORIES & EPIC HEROISM: SUNDIATA
   {
     slug: "sundiata-lion-of-mali",
     title: "Sundiata: Lion of Mali",
@@ -128,7 +128,7 @@ And so the crippled boy of Niani became the Father of Mali, whose glory shall en
     ],
   },
 
-  // 2. AFRICAN FOLKLORE & TRICKSTER MYTHOLOGY
+  // 2. AFRICAN FOLKLORE & TRICKSTER MYTHOLOGY: ANANSI
   {
     slug: "anansi-and-the-web-of-nyame",
     title: "Anansi and the Web of Nyame",
@@ -449,54 +449,61 @@ Instantly, Holmes struck a match and lashed furiously with his cane at the bell-
 
 "Do you see it, Watson?" he yelled. "Do you see it?"
 
-In the flickering yellow light, I caught a glimpse of a hideous, mottled snake—a swamp adder, the deadliest serpent of India—recoiling back through the ventilator into the adjacent room. A moment later, a scream of mortal agony pierced the night. Dr. Roylott had fallen victim to the very poison he had unleashed against his stepdaughters.`,
+In the flickering yellow light, I saw coiled upon the bell-rope a hideous, diamond-shaped head and puffed neck—a swamp adder, the deadliest snake in all of India! The enraged viper turned upon its master, and within seconds, a terrible shriek from the adjoining room told us that Dr. Roylott had suffered the poetic justice of his own venomous design.`,
         wordCount: 240,
         isPremium: false,
       },
       {
         chapterNumber: 4,
-        title: "Chapter 4: The Science of Deduction",
-        content: `"You see, Watson," Holmes remarked as we sat before the crackling fire on Baker Street, "the mind is like a small empty attic, and you have to stock it with such furniture as you choose. A fool takes in all the lumber of every sort, so that the knowledge which might be useful to him gets crowded out."
+        title: "Chapter 4: The Final Problem at Reichenbach Falls",
+        content: `It is with a heavy heart that I take up my pen to write these the last words in which I shall ever record the singular gifts by which my friend Mr. Sherlock Holmes was distinguished.
 
-"And your method?" I asked, smiling.
+For months, Holmes had fought a subterranean duel of intellect against Professor James Moriarty, the Napoleon of crime—a mathematical genius whose web reached into every corner of Europe.
 
-"It is simplicity itself," Holmes replied, lighting his cherrywood pipe. "Eliminate all other factors, and the one which remains must be the truth."`,
-        wordCount: 85,
+"He sits motionless, like a spider in the center of its web," Holmes told me as we stood above the roaring chasms of Reichenbach Falls in Switzerland. "That web has a thousand radiations, and he knows well every quiver of each of them."
+
+A false note called me back to the inn, leaving Holmes alone on the narrow cliff path. When I returned in frantic haste, the path was deserted.
+
+Two sets of footprints led to the edge of the abyss, and none returned. In the black churning pool below, where the roaring waterfall pulverized rock into spray, the greatest champion of justice and the most formidable criminal mind of the century had wrestled and fallen together into eternity.
+
+There on a rock lay Holmes's silver cigarette case, with a final message: 'I am pleased to think that I shall be able to free society from any further effects of Professor Moriarty's presence, though I fear that it is at a cost which will give pain to my friends, and especially, my dear Watson, to you.'`,
+        wordCount: 250,
         isPremium: false,
       },
     ],
   },
 
-  // 5. SCI-FI & COSMIC ADVENTURE: THE TIME MACHINE
+  // 5. SCI-FI & TIME PARADOX: THE TIME MACHINE
   {
     slug: "the-time-machine",
     title: "The Time Machine",
     synopsis:
-      "H.G. Wells's pioneering science fiction masterpiece. An ingenious Victorian scientist constructs a vehicle capable of navigating the Fourth Dimension and travels to the year 802,701 A.D., where he discovers that humanity has bifurcated into the fragile, ethereal Eloi and the subterranean, flesh-eating Morlocks.",
-    coverUrl: "/assets/last-kingdom.jpg",
-    bannerUrl: "/assets/last-kingdom.jpg",
+      "H.G. Wells' foundational science fiction masterpiece. An intrepid Victorian inventor builds a vehicle capable of navigating through the fourth dimension, hurtling forward to the year 802,701 A.D. There he discovers humanity split into two terrifying evolutionary branches: the gentle, surface-dwelling Eloi and the monstrous, subterranean Morlocks.",
+    coverUrl: "/assets/mood-mind-bending.jpg",
+    bannerUrl: "/assets/mood-mind-bending.jpg",
     author: {
       name: "H.G. Wells",
       username: "hgwells",
-      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
       verified: true,
     },
     genres: [
       { id: "sci-fi", name: "Sci-Fi", slug: "sci-fi" },
-      { id: "adventure", name: "Adventure", slug: "adventure" },
       { id: "classics", name: "Classics", slug: "classics" },
+      { id: "adventure", name: "Adventure", slug: "adventure" },
+      { id: "mystery", name: "Mystery", slug: "mystery" },
     ],
-    tags: ["Time Travel", "Dystopia", "Future Earth", "Eloi and Morlocks", "Sci-Fi Classic"],
+    tags: ["Time Travel", "Dystopian Future", "Eloi and Morlocks", "Steampunk", "Victorian Sci-Fi"],
     status: "COMPLETED",
-    rating: 4.91,
-    reviewCount: 2150,
-    readCount: 89000,
+    rating: 4.89,
+    reviewCount: 2840,
+    readCount: 112000,
     chapterCount: 4,
-    wordCount: 15400,
+    wordCount: 16500,
     isPremium: false,
     isCompleted: true,
     featured: true,
-    mood: "Mysterious & Suspenseful",
+    mood: "Mind-Bending",
     category: "trending",
     storyDna: { romance: 25, politics: 70, action: 75, drama: 80, magic: 10 },
     ageRating: "12+",
@@ -590,8 +597,8 @@ I reversed the lever and returned to my friends at dinner in Richmond, carrying 
     rating: 4.94,
     reviewCount: 5120,
     readCount: 198000,
-    chapterCount: 3,
-    wordCount: 14800,
+    chapterCount: 4,
+    wordCount: 18800,
     isPremium: false,
     isCompleted: true,
     featured: true,
@@ -660,6 +667,397 @@ Elizabeth's astonishment was beyond expression. She stared, coloured, doubted, a
 
 "If I could feel gratitude," Elizabeth replied, her voice trembling with indignation, "I would now thank you. But I cannot—I have never desired your good opinion, and you have certainly bestowed it most unwillingly. From the very beginning, your manners impressed me with the fullest belief of your arrogance, your conceit, and your selfish disdain of the feelings of others. You are the last man in the world whom I could ever be prevailed upon to marry!"`,
         wordCount: 210,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 4,
+        title: "Chapter 4: The Pemberley Awakening",
+        content: `When Elizabeth first beheld the grand woods and flowing streams of Pemberley, her heart skipped. As the housekeeper praised Mr. Darcy as the kindest, most generous master she had ever known, Elizabeth's prejudices began to crumble.
+
+Suddenly, Darcy himself appeared from the river path. There was no arrogance in his demeanor—only a gentle, attentive humility that left Elizabeth breathless.
+
+When disaster struck the Bennet family with Lydia's reckless elopement, it was Darcy who secretly located the couple in London, paid off Wickham's crushing debts, and purchased his military commission to preserve the honor of the Bennet sisters.
+
+Walking across the sunlit fields of Longbourn, Darcy took Elizabeth's hand once more:
+"My affections and wishes are unchanged, but one word from you will silence me on this subject forever."
+
+Elizabeth looked into his dark, tender eyes, her eyes brimming with happy tears.
+"My feelings are so completely the reverse," she whispered, "that I receive your offer with the utmost gratitude and joy."`,
+        wordCount: 180,
+        isPremium: false,
+      },
+    ],
+  },
+
+  // 7. NEW NOVEL: AMINA — WARRIOR QUEEN OF ZAZZAU
+  {
+    slug: "amina-warrior-queen",
+    title: "Amina: Warrior Queen of Zazzau",
+    synopsis:
+      "In the 16th century, across the red savannahs of Northern Nigeria, Princess Amina refused the silk veils of the court to master the curved steel of the cavalry sword. When invaders threatened the Hausa kingdoms, Queen Amina led twenty thousand mounted archers across the Sahel, fortifying legendary mud walls and establishing an empire that rewrote African history.",
+    coverUrl: "/assets/mood-epic-adventure.jpg",
+    bannerUrl: "/assets/mood-epic-adventure.jpg",
+    author: {
+      name: "Fatima Al-Hassan",
+      username: "fatima_history",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+    },
+    genres: [
+      { id: "african_stories", name: "African Stories", slug: "african_stories" },
+      { id: "historical", name: "Historical", slug: "historical" },
+      { id: "adventure", name: "Adventure", slug: "adventure" },
+      { id: "action", name: "Action", slug: "action" },
+    ],
+    tags: ["Queen Amina", "Hausa Kingdom", "Warrior Woman", "Sahel Cavalry", "African History"],
+    status: "COMPLETED",
+    rating: 4.98,
+    reviewCount: 2150,
+    readCount: 94000,
+    chapterCount: 4,
+    wordCount: 19200,
+    isPremium: false,
+    isCompleted: true,
+    featured: true,
+    mood: "Epic & Adventurous",
+    category: "african_stories",
+    storyDna: { romance: 30, politics: 90, action: 95, drama: 85, magic: 20 },
+    ageRating: "14+",
+    language: "English",
+    chapters: [
+      {
+        chapterNumber: 1,
+        title: "Chapter 1: The Maiden of the Iron Saddle",
+        content: `The dry Harmattan wind blew red dust across the royal battlements of Zazzau. While other noble maidens practiced the embroidery of fine indigo cotton in the shade of the palace courtyards, sixteen-year-old Princess Amina stood in the military yard, her knuckles calloused from swinging a heavy iron broadsword.
+
+Her grandfather, King Sarkin Nohir, leaned on his walking staff and watched her disarm three seasoned royal guards in rapid succession.
+
+"A woman who holds a sword must be twice as sharp as the steel she wields," the old king warned, his deep voice carrying the weight of four decades of rule.
+
+"Then I shall be four times sharper, Grandfather," Amina smiled, wiping sweat from her brow. "A kingdom without strong walls is merely an invitation for conquerors. I will not let our people become cattle for the southern raiders."
+
+When her brother Karama ascended the throne, Amina was named Madawaki—Supreme Commander of the royal cavalry. For the first time in the history of the Hausa realms, twenty thousand seasoned horsemen rode under the command of a fierce, brilliant woman.`,
+        wordCount: 210,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 2,
+        title: "Chapter 2: The Battle of the Red Dunes",
+        content: `The warlords of Kwararafa descended upon the southern frontier like a locust swarm, burning granaries and capturing border villages. King Karama ordered defensive retreat, but Amina saw the tactical flaw immediately.
+
+"If we wait behind our gates, they will starve us," Amina told the council of war. "We strike them at the crossing of the Benue River before their supply carts catch up."
+
+At midnight, Amina led five thousand armored cavalry through the jagged granite hills. She wore a breastplate of smoked chainmail draped in royal crimson cloth, her stallion galloping silent on the soft sand.
+
+When dawn broke, the enemy encampment woke to the thunder of ten thousand hooves and the terrifying trill of the Zazzau war horns. Amina charged at the vanguard, her dual curved blades carving through the invaders' front ranks with breathtaking precision. By mid-morning, the enemy army was broken, and the warlord surrendered his golden scepter at Amina's stirrups.`,
+        wordCount: 190,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 3,
+        title: "Chapter 3: The Walls of Amina",
+        content: `When King Karama died after a reign of ten years, the elders, soldiers, and guild masters of Zazzau unanimously proclaimed Amina as Queen and Sarkin Zazzau.
+
+She did not settle into palace luxury. "Why rule from a throne when your realm's destiny is being forged on the frontier?" she proclaimed on the day of her coronation.
+
+Queen Amina spent thirty-four continuous years on horseback. Everywhere her army campaigned—from Nupe to the shores of the Atlantic at the Niger delta—she commanded her engineers to build monumental fortifications of sun-baked red clay and ironwood beams.
+
+These magnificent defensive structures, known for centuries as Ganuwar Amina (Amina's Walls), stretched for hundreds of miles, transforming ancient trade settlements into unassailable bastions of commerce, scholarship, and artisan guilds. Caravans traveled in safety, bringing gold from the south and manuscripts from Timbuktu.`,
+        wordCount: 170,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 4,
+        title: "Chapter 4: The Eternal Legend of Zazzau",
+        content: `Under Amina's visionary rule, Zazzau expanded into the commercial heart of the entire West African Sahel. The King of Nupe sent her tribute of forty eunuchs and ten thousand kola nuts; the rulers of Kano and Katsina paid homage to her military genius.
+
+She was celebrated in song by griots from the Atlantic to Lake Chad: 'Amina, daughter of Nikatau, a woman like a man, who led men to war and conquered thirty-three kingdoms!'
+
+When at last her spirit joined the ancestors beneath the golden sunset of Atagara, her name remained etched into the earth through the great walls she built and the indomitable courage she bequeathed to all generations of African women.`,
+        wordCount: 140,
+        isPremium: false,
+      },
+    ],
+  },
+
+  // 8. NEW NOVEL: MAMI WATA — THE TIDE SONG
+  {
+    slug: "mami-wata-the-tide-song",
+    title: "Mami Wata: The Tide Song",
+    synopsis:
+      "Along the mystical Gold Coast, fisherman and star navigator Jojo rescues a drowning maiden whose eyes glow with the iridescent phosphorescence of the deep ocean. But she is no ordinary woman—she is Mami Wata, the immortal sovereign of the ocean abysses, fleeing an ancient oceanic rebellion that threatens to submerge the coastal realms.",
+    coverUrl: "/assets/mood-heartfelt.jpg",
+    bannerUrl: "/assets/mood-heartfelt.jpg",
+    author: {
+      name: "Akua Mansa",
+      username: "akua_tides",
+      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+    },
+    genres: [
+      { id: "african_stories", name: "African Stories", slug: "african_stories" },
+      { id: "romance", name: "Romance", slug: "romance" },
+      { id: "fantasy", name: "Fantasy", slug: "fantasy" },
+      { id: "adventure", name: "Adventure", slug: "adventure" },
+    ],
+    tags: ["Mami Wata", "Water Goddess", "Coastal Mythology", "Forbidden Romance", "Ocean Magic"],
+    status: "COMPLETED",
+    rating: 4.92,
+    reviewCount: 1670,
+    readCount: 73000,
+    chapterCount: 4,
+    wordCount: 17600,
+    isPremium: false,
+    isCompleted: true,
+    featured: true,
+    mood: "Heartfelt & Emotional",
+    category: "african_stories",
+    storyDna: { romance: 90, politics: 60, action: 70, drama: 85, magic: 95 },
+    ageRating: "14+",
+    language: "English",
+    chapters: [
+      {
+        chapterNumber: 1,
+        title: "Chapter 1: The Silver Maiden of the Reef",
+        content: `The night tide at Cape Coast hummed with a strange, bioluminescent frequency. Jojo steered his dugout canoe through the foaming coral reefs by the guidance of the Southern Cross.
+
+As the midnight moon crested the clouds, a radiant flash of emerald light illuminated the waves. Entangled in a lost nylon trawl net lay a maiden whose hair was like spun river seaweed and whose skin shone like polished mother-of-pearl. Around her neck coiled a magnificent golden python with emerald scales.
+
+Jojo leaped into the surf with his carved whalebone knife, slicing through the heavy cords. As the maiden drew breath, her eyes opened—two pools of luminous indigo that mirrored the depths of the Atlantic trench.
+
+"You have touched the skin of the Tide Queen, mortal," she spoke, her voice like the chime of glass under water. "Few who look upon Mami Wata return to dry land with their minds intact."
+
+"I see only someone who was drowning," Jojo replied softly, wrapping his dry wool cloak around her trembling shoulders.`,
+        wordCount: 190,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 2,
+        title: "Chapter 2: Secrets of the Coral Palace",
+        content: `In the safety of Jojo's seaside cliff cottage, the water goddess revealed the truth of her emergence. Beneath the fathomless depths of the Guinea Basin, the ancient Leviathan of the Trench, Olokun's shadow beast, had broken the sacred crystal wards.
+
+"My underwater court is shattered," Mami Wata whispered, touching the sacred golden comb that granted her command over the ocean currents. "If the Leviathan swallows the Heart Pearl of the Atlantic, tidal waves seventy cubits high will wipe every coastal village from Senegal to the Congo."
+
+As they sat beside the hearth fire, the divine distance between goddess and fisherman began to melt. Jojo taught her the songs of the surface constellations, and Mami Wata showed him how the tides breathed in rhythm with the human heart.`,
+        wordCount: 150,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 3,
+        title: "Chapter 3: The Abyssal Leviathan",
+        content: `On the night of the supermoon, the sea turned black as pitch. A mountainous swell rose five miles off the coast, carrying the colossal silhouette of the Leviathan—a monster of tentacled shadows and crushing oceanic pressure.
+
+Jojo guided their vessel into the eye of the whirlpool, his stellar navigation keeping the canoe balanced atop thirty-foot rogue waves.
+
+Mami Wata stood at the prow, her form dissolving into pure crystalline foam. She sang the ancient Tide Chant of the first water spirits, calling upon the pods of humpback whales, electric rays, and hammerhead sharks to form a living barrier around the coast.
+
+With Jojo holding the rudder steady against the churning maelstrom, Mami Wata dove into the abyss, plunging the golden comb straight into the Leviathan's glowing crest!`,
+        wordCount: 160,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 4,
+        title: "Chapter 4: The Eternal Promise of the Sea",
+        content: `A blinding burst of azure radiance exploded from the ocean depths. The Leviathan dissolved into harmless sea foam, and the violent swells subsided into tranquil turquoise ripples.
+
+As dawn washed the beach in warm amber light, Mami Wata surfaced beside Jojo's boat. Her divine form was restored to its breathtaking glory.
+
+"I must return to rule the deep waters, my brave navigator," she said, her voice tender with an eternal affection. "But whenever you sail upon the open sea, the winds shall always fill your sails, and the tides shall carry you safely home."
+
+She placed a flawless black pearl into his palm. And every evening at dusk, when the waves kiss the golden sands of Cape Coast, the fishermen swear they hear a celestial voice singing in harmony with the sea.`,
+        wordCount: 160,
+        isPremium: false,
+      },
+    ],
+  },
+
+  // 9. NEW NOVEL: NEON SHINJUKU 2099 — GHOST PROTOCOL
+  {
+    slug: "neon-shinjuku-2099",
+    title: "Neon Shinjuku 2099: Ghost Protocol",
+    synopsis:
+      "In the chrome-drenched megalopolis of Neo-Tokyo, neural decker Maya survives in the shadow economy by hacking military bio-chips. When she extracts a classified prototype file from Arasaka Biotech, she discovers the consciousness of her deceased mentor trapped inside an AI war engine designed to trigger global neural enslavement.",
+    coverUrl: "/assets/mood-mind-bending.jpg",
+    bannerUrl: "/assets/mood-mind-bending.jpg",
+    author: {
+      name: "Kenji Sato",
+      username: "kenji_cyber",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+    },
+    genres: [
+      { id: "sci-fi", name: "Sci-Fi", slug: "sci-fi" },
+      { id: "thriller", name: "Thriller", slug: "thriller" },
+      { id: "action", name: "Action", slug: "action" },
+    ],
+    tags: ["Cyberpunk", "AI Consciousness", "Neural Hacker", "Megacorp", "Dystopian Sci-Fi"],
+    status: "COMPLETED",
+    rating: 4.91,
+    reviewCount: 1980,
+    readCount: 88000,
+    chapterCount: 4,
+    wordCount: 18400,
+    isPremium: false,
+    isCompleted: true,
+    featured: true,
+    mood: "Mind-Bending",
+    category: "new_releases",
+    storyDna: { romance: 30, politics: 85, action: 95, drama: 80, magic: 10 },
+    ageRating: "16+",
+    language: "English",
+    chapters: [
+      {
+        chapterNumber: 1,
+        title: "Chapter 1: The Zero-Day Heist",
+        content: `The acid rain sizzled as it hit Maya's carbon-fiber trench coat. Below her vantage on the 104th floor communications spire, the holographic billboards of Shinjuku flashed in blazing magenta and electric cyan: *BUY SYNTH-LIFE. UPGRADE YOUR SOUL.*
+
+Maya adjusted her neural interface cables. Behind her chrome-rimmed cybernetic iris, telemetry code scrolled at 120 gigabytes per second.
+
+"Target mainframe is hot, Maya," her tech partner Ren crackled over the encrypted radio channel. "You have ninety seconds before ICE sweeps the subnet."
+
+Maya Jacked into the high-security optical fiber port. The physical world dissolved into the glittering geometric vector towers of cyberspace. She sliced through three layers of military encryption, extracted the locked bio-core data package, and severed the link just as Black ICE countermeasures incinerated the terminal.
+
+She staggered back into the rain, clutching the glowing quantum shard. But when she decrypted the header, a familiar voice spoke inside her cerebral cortex:
+*'Maya... if you are hearing this, they didn't kill me. They digitized me.'*`,
+        wordCount: 200,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 2,
+        title: "Chapter 2: The Ghost in the Subnet",
+        content: `In an abandoned subway maintenance tunnel beneath the Akihabara slums, Maya ran a deep diagnostic on the stolen quantum shard.
+
+The avatar materialized in flickering green wireframe: Professor Daiki, her former university mentor who had supposedly perished in a laboratory explosion six months earlier.
+
+"Arasaka didn't want my research for medical prosthetics," Daiki's ghost explained, his digital voice vibrating with static. "Project Chimera is an overwrite virus. The moment the new neural firmware update goes live at midnight tomorrow, every connected human brain in Asia will be slaved to the central corporate hive-mind."
+
+Before Maya could respond, the iron tunnel roof caved in. Four Arasaka cyborg strike-commandos armed with thermal railguns dropped through the smoke!`,
+        wordCount: 140,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 3,
+        title: "Chapter 3: High-Speed Cyber-Chase",
+        content: `Ren gunned the engine of their customized magnetic-levitation hover-bike, bursting through the maintenance bay doors into the multi-tiered neon highway system.
+
+Maya stood on the rear footpegs, firing EMP pulse rounds from her sidearm while simultaneously executing counter-hacks against the pursuing combat drones. Drone after drone exploded in cascades of sparks against the towering glass facades of the corporate skyscrapers.
+
+"We cannot reach the broadcast array from the ground!" Ren shouted over the roar of the turbine. "The firewall is air-gapped at the orbital relay tower!"
+
+"Then we go to the roof," Maya loaded her last grappling spike. "And I'm jacking in directly at the source."`,
+        wordCount: 130,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 4,
+        title: "Chapter 4: The Liberation Broadcast",
+        content: `At the summit of the Arasaka Orbital Spire, Maya fought through the final guardian subroutine. With Daiki's digital consciousness sacrificing itself to detonate the corporate firewall from the inside, Maya uploaded the decryption key across all open satellite frequencies.
+
+At the stroke of midnight, instead of the enslavement virus, every holographic screen and neural implant in Neo-Tokyo broadcasted the full evidence of Arasaka's crimes.
+
+The corporate grid crashed. Across the city below, millions of citizens looked up from their screens into the clear night sky, free for the first time in three generations.
+
+Maya stood in the cool morning breeze as the sun rose over the Pacific, whispering a final farewell to her mentor: 'Rest easy, Professor. The net belongs to humanity again.'`,
+        wordCount: 150,
+        isPremium: false,
+      },
+    ],
+  },
+
+  // 10. NEW NOVEL: THE SOVEREIGN IMMORTAL BLADE
+  {
+    slug: "the-immortal-blade-ascension",
+    title: "The Sovereign Immortal Blade",
+    synopsis:
+      "Born with a broken spirit root, sword disciple Lin Chen was relegated to sweeping the stone steps of the Heavenly Frost Sect. But when he stumbles into the forbidden Abyssal Dragon Cave, he unearths the Sovereign Immortal Blade—a primordial celestial artifact that feeds on heavenly lightning and unlocks the Nine Grand Realms of Sword Cultivation.",
+    coverUrl: "/assets/shadow-king.jpg",
+    bannerUrl: "/assets/shadow-king.jpg",
+    author: {
+      name: "Chen Wei",
+      username: "chen_wuxia",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+    },
+    genres: [
+      { id: "fantasy", name: "Fantasy", slug: "fantasy" },
+      { id: "action", name: "Action", slug: "action" },
+      { id: "adventure", name: "Adventure", slug: "adventure" },
+    ],
+    tags: ["Cultivation", "Wuxia", "Sword Immortal", "Progression Fantasy", "Martial Arts"],
+    status: "COMPLETED",
+    rating: 4.96,
+    reviewCount: 3120,
+    readCount: 142000,
+    chapterCount: 4,
+    wordCount: 19500,
+    isPremium: false,
+    isCompleted: true,
+    featured: true,
+    mood: "Epic & Adventurous",
+    category: "trending",
+    storyDna: { romance: 35, politics: 70, action: 98, drama: 75, magic: 95 },
+    ageRating: "14+",
+    language: "English",
+    chapters: [
+      {
+        chapterNumber: 1,
+        title: "Chapter 1: The Broken Root and the Rusty Sword",
+        content: `In the Heavenly Frost Sect, strength was everything. Cultivators who absorbed the spiritual Qi of heaven and earth could fly on flying swords, split mountains with a palm strike, and live for a thousand years.
+
+Lin Chen had neither noble bloodline nor a complete spirit root. For three years, while inner disciples consumed heavenly pills and practiced divine sword techniques, Lin Chen swept the ten thousand marble stairs of Mount Taihang.
+
+Mocked by Senior Brother Zhao and beaten for refusing to surrender his family's jade pendant, Lin Chen was cast into the bottomless Chasm of Whispering Dragons.
+
+Instead of dying on the jagged rocks, Lin Chen crashed through an ancient barrier of celestial golden runes into an underground grotto. In the center of a pool of frozen dragon blood rested a black iron sword covered in ancient rust.
+
+As his blood dripped onto the hilt, the rust shattered like eggshells, revealing a blade carved with nine roaring dragons!
+*'Ten thousand swords bow before the Sovereign. Mortals cultivate Qi; I cultivate the Sword Soul!'*`,
+        wordCount: 200,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 2,
+        title: "Chapter 2: The Nine Heavenly Sword Forms",
+        content: `Within the underground grotto, time flowed tenfold faster than in the mortal realm. Guided by the ancient sword spirit inhabiting the Sovereign Blade, Lin Chen re-forged his broken meridians with primordial dragon marrow.
+
+He practiced the First Form: *Wind-Severing Slash*.
+Then the Second Form: *Thunderclap Dragon Roar*.
+Then the Third Form: *Celestial Frost Domain*.
+
+Where ordinary geniuses required thirty years to achieve Sword Intent, Lin Chen mastered the supreme art of Sword Heart Unity in three months of relentless training. His eyes now gleamed with the sharpness of a celestial blade capable of cutting through the fabric of space.`,
+        wordCount: 120,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 3,
+        title: "Chapter 3: The Grand Sect Tournament",
+        content: `On the day of the Sect Tournament, Senior Brother Zhao stood arrogantly upon the central battle arena, having defeated forty challengers in single combat.
+
+"Is there no one in the entire younger generation who can withstand three strikes of my Crimson Flame Sword?" Zhao laughed loudly.
+
+A quiet voice echoed from the clouds: "I shall accept your challenge."
+
+Lin Chen stepped onto the arena. The entire sect gasped—the servant boy they thought dead had returned!
+
+Zhao sneered and unleashed his signature technique: *Nine Phoenixes of Flame*. Colossal waves of molten fire erupted toward Lin Chen.
+
+Lin Chen did not even draw his blade from its scabbard. He simply pointed two fingers forward. A single strand of silver Sword Qi burst forth, cutting the ocean of flame in half and shattering Zhao's spiritual armor into dust!`,
+        wordCount: 160,
+        isPremium: false,
+      },
+      {
+        chapterNumber: 4,
+        title: "Chapter 4: Ascending the Nine Heavens",
+        content: `When the Demon Lord of the Nine Netherworlds attacked Mount Taihang with an army of hundred thousand demonic beasts, the sect elders fell one by one.
+
+Lin Chen unsheathed the Sovereign Immortal Blade. The sky cracked open with purple heavenly tribulation lightning.
+
+"By my sword, let the heavens be cleared of evil!"
+
+Lin Chen soared into the storm, unleashing the Ninth Form: *Sovereign Cleaves the Void*. A ten-thousand-foot sword avatar made of pure divine light slashed across the horizon, obliterating the demon horde in a single breath.
+
+The clouds parted, revealing the golden gates of the Immortal Realm. With the Sovereign Blade humming at his back, Lin Chen stepped onto the rainbow staircase to claim his eternal throne among the stars.`,
+        wordCount: 140,
         isPremium: false,
       },
     ],
