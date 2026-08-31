@@ -103,8 +103,9 @@ async function seedLibrary() {
       }
 
       console.log(`  ✅ Seeded "${novel.title}" (${chapters?.length || 0} chapters)`);
-    } catch (err: any) {
-      console.warn(`  ❌ Failed to seed "${novel.title}":`, err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.warn(`  ❌ Failed to seed "${novel.title}":`, message);
     }
   }
 
@@ -114,8 +115,9 @@ async function seedLibrary() {
     try {
       const res = await importBookByPayload({ source: "gutenberg", sourceId: gid });
       console.log(`  ✅ Gutenberg: "${res.title}" (${res.chapterCount} chapters)`);
-    } catch (err: any) {
-      console.warn(`  ⚠️ Gutenberg ID ${gid} skipped:`, err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.warn(`  ⚠️ Gutenberg ID ${gid} skipped:`, message);
     }
   }
 
@@ -125,8 +127,9 @@ async function seedLibrary() {
     try {
       const res = await importBookByPayload({ source: "openlibrary", sourceId: olid });
       console.log(`  ✅ Open Library: "${res.title}"`);
-    } catch (err: any) {
-      console.warn(`  ⚠️ Open Library ID ${olid} skipped:`, err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.warn(`  ⚠️ Open Library ID ${olid} skipped:`, message);
     }
   }
 
@@ -136,8 +139,9 @@ async function seedLibrary() {
     try {
       const res = await importBookByPayload({ source: "googlebooks", sourceId: gbid });
       console.log(`  ✅ Google Books: "${res.title}"`);
-    } catch (err: any) {
-      console.warn(`  ⚠️ Google Books ID ${gbid} skipped:`, err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.warn(`  ⚠️ Google Books ID ${gbid} skipped:`, message);
     }
   }
 
