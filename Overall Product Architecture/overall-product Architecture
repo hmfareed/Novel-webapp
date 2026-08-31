@@ -1,0 +1,1790 @@
+NOVELVERSE — COMPLETE PRODUCT FLOW
+1. The Core Product Loop
+Everything ultimately revolves around this:
+Visitor
+   ↓
+Discover
+   ↓
+Find a story
+   ↓
+Novel Details
+   ↓
+Start Reading
+   ↓
+Chapter Reader
+   ↓
+React / Comment / Bookmark
+   ↓
+Progress Saved
+   ↓
+Next Chapter
+   ↓
+Follow Novel / Author
+   ↓
+Continue Reading
+   ↓
+Finish Story
+   ↓
+Review / Rate
+   ↓
+Discover Another Story
+Then the platform adds:
+Reader
+   ↕
+Author
+   ↕
+NovelVerse
+   ↕
+Community
+2. COMPLETE READER JOURNEY
+First Visit
+Landing Page
+      ↓
+Explore NovelVerse
+      ↓
+Browse featured stories
+      ↓
+Search / Discover
+      ↓
+Novel Details
+      ↓
+Read Sample
+      ↓
+Continue reading
+      ↓
+Sign Up / Login
+      ↓
+Reader Account
+The user shouldn't be forced to register just to understand what NovelVerse offers.
+Allow:
+Browse
+View novel
+Read free/sample chapters
+Require account for:
+Save progress
+Library
+Bookmarks
+Comments
+Reviews
+Following
+Offline reading
+Premium purchases
+Personalized recommendations
+3. PERSONALIZED ONBOARDING
+After registration:
+Welcome
+   ↓
+"What kind of stories do you love?"
+   ↓
+Select Genres
+   ↓
+Select Story Moods
+   ↓
+Select Favorite Tropes
+   ↓
+Select Preferred Length
+   ↓
+Select Languages
+   ↓
+Follow suggested authors
+   ↓
+Generate personalized feed
+Genres
+Fantasy
+Romance
+Mystery
+Thriller
+Horror
+Adventure
+Drama
+Comedy
+Historical
+Sci-Fi
+Young Adult
+African Fiction
+Afrofuturism
+Mood
+Dark
+Emotional
+Funny
+Romantic
+Suspenseful
+Epic
+Comforting
+Addictive
+Heartbreaking
+Inspirational
+Tropes
+Enemies to Lovers
+Friends to Lovers
+Found Family
+Chosen One
+Antihero
+Second Chance
+Forbidden Love
+Slow Burn
+Revenge
+Political Intrigue
+This data feeds the recommendation system.
+4. DISCOVERY SYSTEM
+Instead of having only:
+Search → Genre → Novel
+
+give users several discovery paths.
+Explore
+├── Trending
+├── New Releases
+├── Popular
+├── Highest Rated
+├── Completed
+├── Almost Finished
+├── Hidden Gems
+├── Editor's Picks
+├── NovelVerse Originals
+├── Recommended For You
+├── Because You Read...
+├── What's Hot
+├── African Stories
+└── Find My Next Story
+5. "WHAT ARE YOU IN THE MOOD FOR?"
+This becomes an important discovery feature.
+Explore
+   ↓
+Find My Next Story
+   ↓
+Mood
+   ↓
+Genre
+   ↓
+Character Type
+   ↓
+Story Length
+   ↓
+Pacing
+   ↓
+Status
+   ↓
+Generate Recommendations
+Example:
+Mood:
+Dark
+
+Genre:
+Fantasy
+
+Character:
+Antihero
+
+Length:
+100+ chapters
+
+Status:
+Completed
+
+Result:
+93% Match
+6. STORY DNA
+Every novel can have a Story DNA profile.
+Novel
+ ↓
+Analyze metadata + author tags + reader behavior
+ ↓
+Generate Story DNA
+Example:
+Romance       ███████████ 91%
+Mystery       █████████   78%
+Drama         ██████████  86%
+Action        ██████      54%
+
+Pacing:
+Slow ───────●── Fast
+
+Tone:
+Dark ─────●──── Light
+
+Emotion:
+Low ─────────●─ High
+Readers can use this for discovery.
+Authors can also edit/confirm the Story DNA.
+7. NOVEL DETAILS FLOW
+Novel Card
+   ↓
+Novel Details
+Details page:
+Cover
+Banner
+Title
+Author
+Rating
+Reads
+Followers
+Status
+Genres
+Tags
+Story DNA
+Content Warnings
+Description
+
+[ Read Now ]
+[ Add to Library ]
+[ Follow ]
+
+Chapters
+Reviews
+Comments
+Similar Stories
+Author
+8. "WHY YOU'LL LOVE THIS"
+Generate explanations for recommendations.
+Because you liked:
+
+The Dragon's Heir
+Shadow Bride
+
+You'll probably like:
+
+The Crown's Temptation
+
+Because it has:
+✓ Dark fantasy
+✓ Slow-burn romance
+✓ Political intrigue
+✓ Strong female lead
+✓ Long-form story
+This makes recommendations feel intelligent rather than random.
+9. SERIALIZED STORY / SEASON SYSTEM
+Instead of treating every novel as one giant list, support:
+Novel
+ ↓
+Series
+ ↓
+Season
+ ↓
+Episode / Chapter
+Example:
+The Crown's Temptation
+
+Season 1
+├── Episode 1
+├── Episode 2
+├── Episode 3
+└── Episode 12
+
+Season 2
+├── Episode 1
+├── Episode 2
+└── Episode 24
+Authors can choose:
+Standalone Novel
+OR
+Serialized Novel
+This lets you create a much more cinematic platform.
+10. CHAPTER READER
+The reader opens:
+Novel Details
+   ↓
+Read Now
+   ↓
+Chapter Reader
+Reader controls:
+Previous
+Next
+Contents
+Font
+Font Size
+Line Height
+Width
+Theme
+Bookmark
+Listen
+Comments
+Reactions
+11. READING PROGRESS
+Every reading session:
+Chapter Opened
+      ↓
+Track position
+      ↓
+Track percentage
+      ↓
+Track reading duration
+      ↓
+Track completion
+      ↓
+Update progress
+When user leaves:
+Save:
+
+Novel
+Chapter
+Position
+Percentage
+Last Read
+When returning:
+Continue Reading
+       ↓
+Resume exactly where they stopped
+12. OFFLINE READING
+This should be designed as a separate system.
+Online
+ ↓
+User opens chapter
+ ↓
+Chapter cached
+ ↓
+Store in IndexedDB
+ ↓
+User loses connection
+ ↓
+Reader continues reading
+ ↓
+Progress stored locally
+ ↓
+Connection returns
+ ↓
+Sync local progress
+ ↓
+Server updates progress
+Important rule
+Offline should not mean:
+"User can bypass premium."
+
+Instead:
+Premium chapter
+      ↓
+Check entitlement ONLINE
+      ↓
+User unlocks/downloads chapter
+      ↓
+Store encrypted/controlled offline copy
+      ↓
+User can read offline
+A new premium chapter cannot be unlocked while offline.
+13. OFFLINE DOWNLOAD FLOW
+Chapter / Novel
+      ↓
+Download
+      ↓
+Check account
+      ↓
+Check subscription / purchase
+      ↓
+Check storage
+      ↓
+Download content
+      ↓
+Store locally
+      ↓
+Mark:
+AVAILABLE OFFLINE
+Library:
+My Library
+   ↓
+Downloads
+   ↓
+Downloaded Novels
+14. OFFLINE SYNC
+When connection returns:
+Local Progress
+       ↓
+Compare timestamps
+       ↓
+Server Progress
+       ↓
+Resolve conflict
+       ↓
+Newest valid progress wins
+       ↓
+Sync
+Also sync:
+Bookmarks
+Reactions
+Comments queued offline where supported
+Reading history
+I would not allow offline comments initially. Reading and progress are enough for V1 offline.
+15. AUDIOBOOK FLOW
+Your earlier idea fits perfectly.
+Chapter Published
+      ↓
+Audio Required?
+      ↓
+Yes
+      ↓
+Background Job
+      ↓
+TTS Provider
+      ↓
+Generate Audio
+      ↓
+Upload Storage
+      ↓
+Save audioUrl
+      ↓
+audioStatus = READY
+      ↓
+Reader sees Listen
+Statuses:
+NONE
+PROCESSING
+READY
+FAILED
+16. AUDIO READER
+Chapter
+   ↓
+Listen
+   ↓
+Audio Player
+Controls:
+Play
+Pause
+15 sec back
+30 sec forward
+Speed
+Sleep timer
+Volume
+Chapter navigation
+Save:
+audioPosition
+audioProgress
+So users can switch:
+Read → Listen
+Listen → Read
+without losing their place.
+17. FUTURE AUDIO DRAMA
+Later:
+Novel
+ ↓
+Audio Edition
+ ↓
+Narrator
+ ↓
+Multiple Characters
+ ↓
+Sound Effects
+ ↓
+Background Music
+This becomes a premium content format.
+18. READING REACTIONS
+While reading:
+Paragraph
+ ↓
+React
+Available:
+❤️
+😂
+😭
+😱
+🔥
+😮
+Store:
+userId
+chapterId
+paragraphId
+reaction
+Display:
+😱 1,204
+❤️ 421
+😭 782
+19. CHAPTER COMMENTS
+At the end of a chapter:
+Chapter Complete
+      ↓
+Reader sees comments
+      ↓
+Comment
+      ↓
+Reply
+      ↓
+Like
+      ↓
+Report
+Comments should be:
+Moderated
+Reportable
+Likeable
+Replyable
+20. LIVE CHAPTER PREMIERE
+This is a major standout feature.
+Author:
+Write Chapter
+ ↓
+Submit
+ ↓
+Approved
+ ↓
+Schedule Premiere
+ ↓
+Friday 8:00 PM
+Readers:
+Upcoming
+ ↓
+Chapter Premiere
+ ↓
+Countdown
+ ↓
+Reminder
+ ↓
+Chapter Unlocks
+ ↓
+Readers enter together
+ ↓
+Live reactions/comments
+After premiere:
+Normal chapter
+21. AUTHOR FOLLOWING
+Author Profile
+      ↓
+Follow
+      ↓
+Notification preference
+When author publishes:
+New Chapter
+      ↓
+Notification Service
+      ↓
+Followers
+Notification:
+Elara Voss just published Chapter 129 of The Crown's Temptation.
+
+22. NOVEL FOLLOWING
+Allow users to follow individual novels too.
+Follow Novel
+      ↓
+New chapter
+      ↓
+Notification
+Different from library.
+Library
+"I want to read this."
+Follow
+"I want to know when something happens."
+23. AUTHOR PROFILE
+Author page:
+Author
+ ↓
+Bio
+ ↓
+Followers
+ ↓
+Published novels
+ ↓
+Current novels
+ ↓
+Completed novels
+ ↓
+Latest updates
+ ↓
+Author notes
+24. AUTHOR NOTES
+Authors can publish updates without creating chapters.
+Author Studio
+ ↓
+Author Notes
+ ↓
+Create Update
+ ↓
+Publish
+ ↓
+Followers notified
+Example:
+"Chapter 42 is coming tomorrow. Thank you for 20,000 readers!"
+
+25. READER → AUTHOR QUESTIONS
+Eventually:
+Author
+ ↓
+Community
+ ↓
+Ask Question
+ ↓
+Author responds
+Questions can be:
+Public
+Answered
+Pinned
+This strengthens the creator ecosystem.
+26. AUTHOR STUDIO
+The author flow becomes:
+Author Application
+      ↓
+Approval
+      ↓
+Author Studio
+      ↓
+Dashboard
+Dashboard:
+Views
+Readers
+Followers
+Revenue
+Books
+Retention
+Recent Activity
+27. CREATE NOVEL FLOW
+Create Novel
+ ↓
+Basic Information
+ ↓
+Cover
+ ↓
+Description
+ ↓
+Genres
+ ↓
+Tags
+ ↓
+Story DNA
+ ↓
+Content Warnings
+ ↓
+Age Rating
+ ↓
+Series
+ ↓
+Monetization
+ ↓
+Save Draft
+28. CHAPTER WRITING FLOW
+Novel
+ ↓
+Chapters
+ ↓
+New Chapter
+ ↓
+Editor
+Editor:
+Title
+Content
+Word count
+Autosave
+Preview
+AI Assist
+Comments
+Version history
+Then:
+Save Draft
+OR
+Submit
+29. AUTOSAVE
+While author writes:
+Typing
+ ↓
+Debounce
+ ↓
+Autosave
+ ↓
+"Saved 5 seconds ago"
+If browser crashes:
+Open Editor
+ ↓
+Restore latest draft
+30. VERSION HISTORY
+This is worth adding.
+Chapter
+ ↓
+Version History
+Example:
+Version 5
+Today 12:30
+
+Version 4
+Today 11:52
+
+Version 3
+Yesterday
+Author can:
+View
+Compare
+Restore
+This is especially valuable for serious authors.
+31. AI WRITING ASSISTANT
+Important rule:
+AI assists. Author remains the creator.
+Flow:
+Author highlights text
+      ↓
+Assist
+      ↓
+Choose action
+Actions:
+Improve prose
+Fix grammar
+Make dialogue natural
+Shorten
+Expand
+Change tone
+Suggest description
+Check continuity
+Suggest title
+AI generates suggestions.
+Original
+      │
+      ├── Accept
+      ├── Reject
+      └── Edit manually
+Never automatically replace the author's writing.
+32. STORY CONSISTENCY AI
+This is more interesting than basic grammar.
+AI scans:
+Characters
+Locations
+Timeline
+Relationships
+Events
+Objects
+Then warns:
+"Chapter 31 says Marcus is 24, but Chapter 8 describes him as 27."
+
+Or:
+"The character was previously described as having blue eyes."
+
+This could become one of NovelVerse's best author tools.
+33. PLAGIARISM / ORIGINALITY FLOW
+When author submits:
+SUBMITTED
+    ↓
+Originality Scan
+    ↓
+Similarity Score
+    ↓
+Moderator Queue
+Example:
+Originality Score
+
+96%
+
+No significant matches detected.
+Or:
+Potential Match
+
+Similarity: 82%
+
+Review required.
+Important:
+AI score should never automatically determine guilt.
+Moderator makes the final decision.
+34. MODERATION
+Submission
+ ↓
+Automated checks
+ ↓
+Moderator queue
+ ↓
+Review
+Moderator sees:
+Novel
+Author
+Chapter
+Originality score
+Content warnings
+Reports
+History
+Decision:
+Approve
+Reject
+Request Changes
+Suspend
+Escalate
+35. CONTENT WARNINGS
+Author selects:
+Violence
+Sexual content
+Self-harm
+Strong language
+Substance use
+Trauma
+Abuse
+Horror
+Novel displays:
+Content Warning
+
+This story contains:
+⚠ Violence
+⚠ Strong language
+36. AGE GATING
+Novel
+ ↓
+Age rating
+ ↓
+Age gate required?
+ ↓
+Yes
+ ↓
+Confirmation
+ ↓
+User confirms
+ ↓
+Store confirmation timestamp
+ ↓
+Allow access
+Don't rely only on a client-side boolean.
+37. SERIES / UNIVERSE
+Create:
+Universe
+ ↓
+Series
+ ↓
+Novels
+ ↓
+Chapters
+Example:
+THE SHADOW UNIVERSE
+
+Series 1
+ ├── Book 1
+ ├── Book 2
+ └── Book 3
+
+Series 2
+ ├── Spin-off 1
+ └── Spin-off 2
+Then:
+Continue the Universe
+
+becomes a discovery mechanism.
+38. CO-AUTHOR SYSTEM
+Author creates novel:
+Novel
+ ↓
+Collaborators
+ ↓
+Invite user
+ ↓
+Select role
+Roles:
+Co-author
+Editor
+Translator
+Permissions:
+View
+Edit
+Write chapters
+Submit
+Publish
+Manage metadata
+View analytics
+Every action should be recorded.
+39. CLERK ORGANIZATION OPTION
+For collaborative author teams:
+Novel
+ ↓
+Clerk Organization
+ ↓
+Members
+ ↓
+Roles / permissions
+But I would not make this mandatory for every novel at MVP.
+Keep simple author ownership first.
+Introduce Organizations when collaboration becomes important.
+40. READER GAMIFICATION
+Reading generates activity:
+Read chapter
+ ↓
+Complete chapter
+ ↓
+Earn XP / coins
+Possible achievements:
+First Chapter
+10 Chapters
+100 Chapters
+First Novel Completed
+7-Day Streak
+30-Day Streak
+100-Day Streak
+41. READING STREAK
+Reader opens novel
+ ↓
+Reads enough content
+ ↓
+Daily streak qualifies
+ ↓
+Streak +1
+Example:
+🔥 17 Day Streak
+
+Read today to keep it alive.
+Rules need to prevent trivial manipulation.
+For example:
+A minimum reading threshold must be reached.
+
+42. COIN ECONOMY
+Separate:
+Real Money
+      ↓
+Purchase
+      ↓
+Coins
+And:
+Activity
+ ↓
+Earn Coins
+Coins:
+Referral
+Streak
+Promotions
+Events
+Rewards
+Spend:
+Premium Chapter
+Special Content
+Early Access
+43. WALLET
+My Wallet
+
+Coins
+1,250
+
+Earned
+3,400
+
+Spent
+2,150
+Transactions:
++100 Referral
++50 Streak
+-30 Chapter Unlock
+Keep a transaction ledger rather than simply modifying balance without history.
+44. REFERRAL FLOW
+User A
+ ↓
+Share referral link
+ ↓
+User B registers
+ ↓
+User B becomes verified
+ ↓
+User B makes qualifying purchase
+ ↓
+Referral validated
+ ↓
+A receives reward
+ ↓
+B receives reward
+Don't reward immediately at signup if your rule requires a purchase.
+This prevents abuse.
+45. SUBSCRIPTIONS
+Your current plan structure:
+FREE
+PLUS
+PREMIUM
+Free
+Free novels
+Sample chapters
+Library
+Progress
+Ads
+Plus
+No ads
+Premium access allowance
+Early access
+Premium
+Everything in Plus
+Offline
+Audiobooks
+Exclusive content
+Advanced features
+But keep the entitlement model:
+User
+ ↓
+Entitlements
+ ↓
+Features
+rather than:
+User
+ ↓
+Plan === PREMIUM
+This lets you change plans later.
+46. PAYMENT FLOW
+Subscription
+Select Plan
+ ↓
+Checkout
+ ↓
+Payment Provider
+ ↓
+Webhook
+ ↓
+Verify payment
+ ↓
+Update subscription
+ ↓
+Entitlement activated
+ ↓
+User gets features
+Premium chapter
+Open chapter
+ ↓
+Entitlement check
+ ↓
+Free?
+ ├── Yes → Read
+ └── No
+       ↓
+   Has subscription?
+       ├── Yes → Read
+       └── No
+             ↓
+         Has coins?
+             ├── Yes → Unlock
+             └── No
+                  ↓
+              Purchase
+47. GHANA PAYMENT FLOW
+For Paystack:
+Reader
+ ↓
+Paystack
+ ↓
+MoMo/Card
+ ↓
+Payment
+ ↓
+Paystack webhook
+ ↓
+Verify transaction
+ ↓
+Create transaction record
+ ↓
+Create entitlement/unlock
+ ↓
+Reader gets access
+Never unlock content simply because the browser says payment succeeded.
+48. AUTHOR EARNINGS
+When a paid transaction happens:
+Reader payment
+ ↓
+Payment verified
+ ↓
+Calculate platform fee
+ ↓
+Calculate author share
+ ↓
+Create ledger entries
+ ↓
+Author pending balance
+ ↓
+Settlement period
+ ↓
+Available balance
+ ↓
+Withdrawal
+49. AUTHOR PAYOUT
+Author
+ ↓
+Earnings
+ ↓
+Available balance
+ ↓
+Request payout
+ ↓
+Validate minimum threshold
+ ↓
+Verify payout account
+ ↓
+Create payout
+ ↓
+Paystack
+ ↓
+Webhook
+ ↓
+Payout completed
+50. AUTHOR ANALYTICS
+Don't just show views.
+Show:
+Readers
+Unique Readers
+Reads
+Chapter Completion
+Retention
+Drop-off
+Average Reading Time
+Followers
+Reviews
+Ratings
+Revenue
+Example:
+Chapter 1     100%
+Chapter 2      94%
+Chapter 3      91%
+Chapter 4      88%
+Chapter 5      72%
+Chapter 6      69%
+This tells the author where readers leave.
+51. READER ANALYTICS
+Your recommendation engine should learn from:
+Views
+Reads
+Completed chapters
+Completed novels
+Bookmarks
+Library additions
+Ratings
+Reviews
+Follows
+Searches
+Genres
+Story DNA
+But don't treat every event equally.
+For example:
+View = low signal
+Click = low/medium
+Chapter completion = high
+Novel completion = very high
+Rating = very high
+Follow = very high
+52. RECOMMENDATION ENGINE
+Start rules-based.
+User behavior
+ ↓
+Genre preference
+ ↓
+Tag preference
+ ↓
+Author preference
+ ↓
+Story DNA preference
+ ↓
+Reading length preference
+ ↓
+Status preference
+ ↓
+Recommendation score
+ ↓
+Rank novels
+Later:
+Collaborative filtering
++
+Content similarity
++
+Behavior
++
+AI
+53. "BECAUSE YOU READ"
+Example:
+Because you read
+The Crown's Temptation
+
+You may like:
+
+The Queen's Shadow
+94% match
+54. TRENDING ENGINE
+Don't simply use total views.
+A novel with 1 million old views shouldn't necessarily beat a novel exploding today.
+Use:
+Recent views
++
+Completion rate
++
+Reading velocity
++
+Ratings
++
+Engagement
++
+New followers
+Then:
+Trending Score
+55. EDITOR'S PICKS
+Create an editorial system.
+Admin / Editor
+ ↓
+Find promising novel
+ ↓
+Review
+ ↓
+Add to Editor's Picks
+ ↓
+Set duration
+ ↓
+Homepage placement
+This allows human curation alongside algorithms.
+56. NOVELVERSE ORIGINALS
+Eventually:
+Author
+ ↓
+Pitch story
+ ↓
+Editorial review
+ ↓
+Contract
+ ↓
+NovelVerse Original
+ ↓
+Exclusive publication
+ ↓
+Promotion
+ ↓
+Reader feedback
+ ↓
+Revenue sharing
+You can create:
+NovelVerse Originals
+NovelVerse Exclusive
+NovelVerse Featured
+57. AFRICAN STORYTELLING HUB
+Make this a first-class discovery section:
+African Stories
+├── Ghana
+├── Nigeria
+├── Kenya
+├── South Africa
+├── Uganda
+├── Tanzania
+├── Senegal
+└── More
+Genres:
+African Fantasy
+African Romance
+African Historical
+African Mythology
+African Folklore
+Afrofuturism
+58. LANGUAGE SYSTEM
+Eventually:
+Novel
+ ↓
+Original Language
+ ↓
+Official Translation
+Example:
+Original
+English
+
+Translations
+Twi
+French
+Swahili
+Arabic
+Each translation should be treated as a related content version, not a completely unrelated novel.
+59. YEAR IN REVIEW
+At the end of each year:
+Analytics
+ ↓
+Aggregate user events
+ ↓
+Generate personalized story
+ ↓
+Create shareable cards
+Show:
+Novels read
+Chapters read
+Words estimated
+Hours reading
+Favorite genre
+Favorite author
+Longest streak
+Most-read month
+Most-read day
+Top novel
+Then:
+Share
+WhatsApp
+Instagram
+Facebook
+X
+Download card
+60. NOTIFICATION SYSTEM
+Central notification service.
+Events:
+NEW_CHAPTER
+AUTHOR_UPDATE
+COMMENT_REPLY
+COMMENT_LIKE
+NOVEL_UPDATE
+PREMIERE_STARTING
+PREMIERE_LIVE
+SUBMISSION_APPROVED
+SUBMISSION_REJECTED
+PAYMENT_SUCCESS
+PAYOUT_SUCCESS
+STREAK
+REFERRAL_REWARD
+SYSTEM
+Delivery:
+In-app
+Email
+Push notification
+Allow users to configure each.
+61. ADMIN DASHBOARD
+Admin sees:
+Users
+Authors
+Novels
+Chapters
+Reports
+Revenue
+Subscriptions
+Payouts
+Moderation
+Analytics
+Dashboard:
+Total Readers
+Active Readers
+Authors
+Novels
+Chapters
+Reads
+Revenue
+Pending Reports
+Pending Submissions
+62. MODERATION CENTER
+Central queue:
+Pending submissions
+Reports
+Copyright claims
+Plagiarism alerts
+Content warnings
+User violations
+Each item:
+Open
+Investigate
+Assign
+Action
+Resolve
+63. REPORTING FLOW
+Reader
+ ↓
+Report
+ ↓
+Select reason
+ ↓
+Submit
+ ↓
+Report ID created
+ ↓
+Moderator queue
+ ↓
+Investigation
+ ↓
+Decision
+ ↓
+Action
+ ↓
+Reporter optionally notified
+64. COPYRIGHT FLOW
+Copyright Complaint
+ ↓
+Claim created
+ ↓
+Content temporarily reviewed
+ ↓
+Author notified
+ ↓
+Evidence submitted
+ ↓
+Moderator investigation
+ ↓
+Decision
+Possible:
+Dismiss
+Restrict
+Remove
+Suspend
+Escalate
+Keep an audit trail.
+65. AUDIT LOG
+Every sensitive action:
+Who
+What
+When
+Resource
+Before
+After
+IP
+Reason
+Examples:
+ADMIN_SUSPENDED_AUTHOR
+MODERATOR_APPROVED_CHAPTER
+ADMIN_CHANGED_SUBSCRIPTION
+AUTHOR_PUBLISHED_CHAPTER
+AUTHOR_REQUESTED_PAYOUT
+66. SEARCH
+Search should eventually support:
+Title
+Author
+Genre
+Tag
+Description
+Character
+Series
+Universe
+Filters:
+Genre
+Rating
+Length
+Status
+Language
+Premium
+Completed
+Trending
+67. SMART SEARCH
+Later:
+User searches:
+"fantasy romance with a powerful female lead and no love triangle"
+
+System interprets:
+Genre = Fantasy
+Genre = Romance
+Character = Female Lead
+Negative trope = Love Triangle
+Then returns matching novels.
+This could eventually use AI/semantic search.
+68. COMMUNITY
+Your community shouldn't just be comments.
+Eventually:
+Community
+├── Discussions
+├── Author Q&A
+├── Reading Clubs
+├── Live Premières
+├── Fan Groups
+├── Reviews
+└── Events
+69. READING CLUBS
+Potential future feature:
+Create Reading Club
+ ↓
+Choose novel
+ ↓
+Invite members
+ ↓
+Set reading schedule
+ ↓
+Discussion
+ ↓
+Progress
+Example:
+"The Crown's Temptation — Chapter 20 discussion"
+
+This can make NovelVerse feel much more social.
+70. READING EVENTS
+Examples:
+Weekend Reading Challenge
+African Fiction Month
+Fantasy Week
+Author Spotlight
+NovelVerse Originals Week
+Readers earn:
+Badges
+Coins
+Exclusive content
+71. HOME PAGE PERSONALIZATION
+Eventually every reader's homepage becomes different.
+Hero
+ ↓
+Continue Reading
+ ↓
+Because You Read
+ ↓
+Trending For You
+ ↓
+New From Authors You Follow
+ ↓
+Your Genres
+ ↓
+Editor's Picks
+ ↓
+NovelVerse Originals
+ ↓
+African Stories
+72. THE COMPLETE NOVEL DATA FLOW
+This is the part your AI needs to understand.
+AUTHOR
+  ↓
+Creates Novel
+  ↓
+Adds Metadata
+  ↓
+Adds Story DNA
+  ↓
+Adds Content Warnings
+  ↓
+Adds Chapters
+  ↓
+Submits
+  ↓
+Automated Checks
+  ├── Validation
+  ├── Copyright declaration
+  ├── Originality scan
+  └── Content checks
+  ↓
+MODERATOR
+  ↓
+Approve
+  ↓
+PUBLISH
+  ↓
+INDEX FOR SEARCH
+  ↓
+RECOMMENDATION ENGINE
+  ↓
+DISCOVERY
+  ↓
+READER
+  ↓
+READ
+  ↓
+ENGAGEMENT
+  ├── Complete
+  ├── React
+  ├── Comment
+  ├── Bookmark
+  ├── Rate
+  └── Follow
+  ↓
+ANALYTICS
+  ↓
+AUTHOR INSIGHTS
+  ↓
+BETTER CONTENT
+  ↓
+MORE READERS
+73. THE COMPLETE MONETIZATION FLOW
+Content
+ ↓
+Free / Premium
+ ↓
+Reader
+ ↓
+Entitlement Check
+ ↓
+ ┌─────────────────────────┐
+ │                         │
+Free                     Paid
+ │                         │
+ ↓                         ↓
+Read                  Subscription?
+                          │
+                    ┌─────┴─────┐
+                    │           │
+                   Yes          No
+                    │           │
+                    ↓           ↓
+                  Read       Coins?
+                                │
+                          ┌─────┴─────┐
+                          │           │
+                         Yes          No
+                          │           │
+                          ↓           ↓
+                       Unlock     Purchase
+                                      │
+                                      ↓
+                                  Paystack
+                                      │
+                                      ↓
+                                   Verify
+                                      │
+                                      ↓
+                                  Unlock
+74. THE COMPLETE OFFLINE FLOW
+ONLINE
+  ↓
+User opens novel
+  ↓
+Checks entitlement
+  ↓
+Download
+  ↓
+IndexedDB
+  ↓
+Available Offline
+  ↓
+OFFLINE
+  ↓
+Read
+  ↓
+Progress stored locally
+  ↓
+ONLINE
+  ↓
+Sync
+  ↓
+Server timestamp comparison
+  ↓
+Resolve conflict
+  ↓
+Update MongoDB
+75. THE COMPLETE AUDIO FLOW
+Chapter Approved
+      ↓
+Audio Generation Requested
+      ↓
+Queue
+      ↓
+TTS
+      ↓
+Audio Processing
+      ↓
+Storage
+      ↓
+Audio Ready
+      ↓
+Entitlement Check
+      ↓
+Listen
+      ↓
+Audio Progress
+      ↓
+Resume Later
+76. THE COMPLETE AUTHOR FLOW
+Reader
+ ↓
+Apply as Author
+ ↓
+Admin Review
+ ↓
+Approved
+ ↓
+Author Studio
+ ↓
+Create Novel
+ ↓
+Create Chapters
+ ↓
+AI Assistance
+ ↓
+Autosave
+ ↓
+Version History
+ ↓
+Submit
+ ↓
+Originality Check
+ ↓
+Moderation
+ ↓
+Approval
+ ↓
+Publish
+ ↓
+Readers
+ ↓
+Analytics
+ ↓
+Revenue
+ ↓
+Payout
+77. THE COMPLETE PLATFORM ECOSYSTEM
+Ultimately, NovelVerse becomes:
+                              NOVELVERSE
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          │                       │                       │
+          ▼                       ▼                       ▼
+       READERS                 AUTHORS                 ADMIN
+          │                       │                       │
+          │                       │                       │
+      Discover                 Create                  Manage
+      Read                     Write                   Moderate
+      React                    Publish                 Analyze
+      Comment                  Analyze                 Configure
+      Review                   Earn                    Protect
+      Follow                   Collaborate             Monetize
+          │                       │                       │
+          └───────────────────────┼───────────────────────┘
+                                  │
+                                  ▼
+                           NOVELVERSE CORE
+                                  │
+        ┌─────────────┬───────────┼───────────┬──────────────┐
+        ▼             ▼           ▼           ▼              ▼
+     Content       Discovery   Community   Payments       Analytics
+        │             │           │           │              │
+        ▼             ▼           ▼           ▼              ▼
+     Novels        AI/Rules    Comments     Coins          Insights
+     Chapters      Trending    Reactions    Subs           Recommendations
+     Series        DNA         Clubs        Payouts        Personalization
+     Audio         Matching    Premières    Wallets
+78. What I Would Actually Build First
+Even though we now have 70+ feature ideas, don't put all of them into the first development phase.
+Your MVP core should be:
+Reader
+Landing
+Explore
+Search
+Novel details
+Chapter list
+Chapter reader
+Reading progress
+Library
+Bookmarks
+Ratings/reviews
+Follow authors
+Author
+Author profile
+Author dashboard
+Create novel
+Chapter editor
+Autosave
+Drafts
+Submission
+Publishing
+Admin
+Dashboard
+Users
+Authors
+Novels
+Chapters
+Genres
+Submissions
+Reports
+Moderation
+Infrastructure
+Clerk
+MongoDB
+Storage
+Permissions
+Notifications
+Analytics events
+SEO
+Then Phase 2:
+Story DNA
+Better recommendations
+Reactions
+Author notes
+Series
+Content warnings
+Age gating
+Version history
+Phase 3:
+Subscriptions
+Coins
+Paystack
+Author wallet
+Payouts
+Referrals
+Phase 4:
+Audiobooks
+Offline reading
+Reading streaks
+Gamification
+Live premieres
+Phase 5:
+AI Story Intelligence
+Plagiarism detection
+Smart search
+Advanced recommendations
+Year in Review
+Phase 6:
+NovelVerse Originals
+African Story Hub
+Translation ecosystem
+Reading clubs
+Audio drama
+The most important strategic point
+I would not try to beat Royal Road, Wattpad, Inkitt, Radish and Kindle at everything.
+I'd make NovelVerse's identity:
+A cinematic social reading platform where readers discover addictive serialized stories, authors get powerful tools to build their audience, and African stories have a first-class home.
+
+Then your strongest differentiators become:
+1. Netflix-style discovery
+2. Story DNA + "Find My Next Story"
+3. Social/interactive reading
+4. Live chapter premieres
+5. Powerful author intelligence
+6. NovelVerse Originals
+7. African storytelling ecosystem
+8. Reading + audiobook + offline in one experience

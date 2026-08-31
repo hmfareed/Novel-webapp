@@ -1,0 +1,543 @@
+/* ============================================================
+   NovelVerse Design Token System
+   Primary identity: AMOLED Black + Violet/Purple
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ============================================================
+   LAYER: BASE — Design Tokens & shadcn Bridge
+   ============================================================ */
+@layer base {
+
+  /* ----------------------------------------------------------
+     ROOT: NovelVerse Tokens (AMOLED Dark — Primary/Default)
+     ---------------------------------------------------------- */
+  :root {
+    /* --- BACKGROUNDS (AMOLED hierarchy) --- */
+    --nv-bg:          #000000;   /* true AMOLED black */
+    --nv-surface-0:   #000000;   /* page background */
+    --nv-surface-1:   #050505;   /* cards, panels */
+    --nv-surface-2:   #080808;   /* elevated cards */
+    --nv-surface-3:   #0D0D0D;   /* tooltips, popovers */
+    --nv-surface-4:   #111111;   /* hover states */
+    --nv-surface-5:   #161616;   /* active / selected */
+    --nv-overlay:     rgba(0, 0, 0, 0.72);
+
+    /* --- VIOLET / PURPLE BRAND ACCENT --- */
+    --nv-violet-50:   #f5f3ff;
+    --nv-violet-100:  #ede9fe;
+    --nv-violet-200:  #ddd6fe;
+    --nv-violet-300:  #c4b5fd;
+    --nv-violet-400:  #a78bfa;
+    --nv-violet-500:  #8b5cf6;   /* primary accent */
+    --nv-violet-600:  #7c3aed;   /* hover accent */
+    --nv-violet-700:  #6d28d9;
+    --nv-violet-800:  #5b21b6;
+    --nv-violet-900:  #4c1d95;
+    --nv-violet-950:  #2e1065;
+
+    /* --- TEXT --- */
+    --nv-text-primary:   #ffffff;
+    --nv-text-secondary: rgba(255, 255, 255, 0.72);
+    --nv-text-muted:     rgba(255, 255, 255, 0.44);
+    --nv-text-disabled:  rgba(255, 255, 255, 0.24);
+    --nv-text-inverse:   #000000;
+
+    /* --- BORDERS --- */
+    --nv-border-subtle:   rgba(255, 255, 255, 0.06);
+    --nv-border-default:  rgba(255, 255, 255, 0.10);
+    --nv-border-emphasis: rgba(255, 255, 255, 0.18);
+    --nv-border-accent:   rgba(139, 92, 246, 0.40);  /* violet tinted */
+    --nv-border-violet:   var(--nv-violet-500);
+
+    /* --- TYPOGRAPHY --- */
+    --nv-font-sans:  var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+    --nv-font-serif: var(--font-playfair), "Playfair Display", ui-serif, Georgia, serif;
+    --nv-font-mono:  var(--font-geist-mono), "JetBrains Mono", ui-monospace, monospace;
+
+    /* --- SPACING (4px base grid) --- */
+    --nv-space-1:  0.25rem;   /*  4px */
+    --nv-space-2:  0.5rem;    /*  8px */
+    --nv-space-3:  0.75rem;   /* 12px */
+    --nv-space-4:  1rem;      /* 16px */
+    --nv-space-5:  1.25rem;   /* 20px */
+    --nv-space-6:  1.5rem;    /* 24px */
+    --nv-space-8:  2rem;      /* 32px */
+    --nv-space-10: 2.5rem;    /* 40px */
+    --nv-space-12: 3rem;      /* 48px */
+    --nv-space-16: 4rem;      /* 64px */
+    --nv-space-20: 5rem;      /* 80px */
+    --nv-space-24: 6rem;      /* 96px */
+
+    /* --- BORDER RADIUS --- */
+    --nv-radius-xs:   0.25rem;  /*  4px */
+    --nv-radius-sm:   0.375rem; /*  6px */
+    --nv-radius-md:   0.5rem;   /*  8px */
+    --nv-radius-lg:   0.75rem;  /* 12px */
+    --nv-radius-xl:   1rem;     /* 16px */
+    --nv-radius-2xl:  1.25rem;  /* 20px */
+    --nv-radius-3xl:  1.5rem;   /* 24px */
+    --nv-radius-full: 9999px;
+
+    /* --- SHADOWS --- */
+    --nv-shadow-xs:       0 1px 2px rgba(0, 0, 0, 0.60);
+    --nv-shadow-sm:       0 2px 4px rgba(0, 0, 0, 0.60), 0 1px 2px rgba(0, 0, 0, 0.40);
+    --nv-shadow-card:     0 4px 24px rgba(0, 0, 0, 0.80), 0 1px 2px rgba(0, 0, 0, 0.60);
+    --nv-shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.90), 0 2px 8px rgba(0, 0, 0, 0.60);
+    --nv-shadow-glow:     0 0 24px rgba(139, 92, 246, 0.30), 0 0 8px rgba(139, 92, 246, 0.16);
+    --nv-shadow-glow-lg:  0 0 48px rgba(139, 92, 246, 0.24), 0 0 16px rgba(139, 92, 246, 0.12);
+    --nv-shadow-cinematic:0 20px 80px rgba(0, 0, 0, 0.95), 0 4px 16px rgba(0, 0, 0, 0.70);
+    --nv-shadow-inset:    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    /* --- TRANSITIONS --- */
+    --nv-transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --nv-transition-base:   250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --nv-transition-slow:   400ms cubic-bezier(0.4, 0, 0.2, 1);
+    --nv-transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* --- FOCUS RING (accessibility) --- */
+    --nv-focus-ring: 0 0 0 2px var(--nv-bg), 0 0 0 4px var(--nv-violet-500);
+
+    /* --- Z-INDEX SCALE --- */
+    --nv-z-base:    0;
+    --nv-z-raised:  10;
+    --nv-z-dropdown:200;
+    --nv-z-sticky:  300;
+    --nv-z-nav:     400;
+    --nv-z-modal:   500;
+    --nv-z-toast:   600;
+    --nv-z-top:     9999;
+
+    /* --- CONTAINER WIDTHS --- */
+    --nv-container-sm:  640px;
+    --nv-container-md:  768px;
+    --nv-container-lg:  1024px;
+    --nv-container-xl:  1280px;
+    --nv-container-2xl: 1440px;
+
+    /* --------------------------------------------------------
+       SHADCN/UI BRIDGE
+       Maps shadcn's expected variables to NovelVerse tokens.
+       Every shadcn component automatically inherits the theme.
+       -------------------------------------------------------- */
+    --background:       0 0% 0%;          /* #000000 AMOLED */
+    --foreground:       0 0% 100%;        /* #ffffff */
+
+    --card:             0 0% 2%;          /* #050505 */
+    --card-foreground:  0 0% 100%;
+
+    --popover:          0 0% 3%;          /* #080808 */
+    --popover-foreground: 0 0% 100%;
+
+    --primary:          263 70% 58%;      /* violet-500 #8b5cf6 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:        0 0% 6%;          /* #0D0D0D */
+    --secondary-foreground: 0 0% 72%;
+
+    --muted:            0 0% 5%;          /* #0D0D0D */
+    --muted-foreground: 0 0% 44%;
+
+    --accent:           263 70% 58%;      /* violet-500 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive:      0 72% 51%;        /* red-500 */
+    --destructive-foreground: 0 0% 100%;
+
+    --border:           0 0% 10%;         /* subtle white border */
+    --input:            0 0% 8%;
+    --ring:             263 70% 58%;      /* violet focus ring */
+
+    --radius:           0.5rem;           /* nv-radius-md */
+
+    /* Chart colors (unused now, but declared so shadcn doesn't error) */
+    --chart-1: 263 70% 58%;
+    --chart-2: 280 65% 60%;
+    --chart-3: 240 60% 65%;
+    --chart-4: 300 55% 55%;
+    --chart-5: 220 70% 60%;
+
+    /* Sidebar (for future admin layout) */
+    --sidebar:              0 0% 3%;
+    --sidebar-foreground:   0 0% 72%;
+    --sidebar-primary:      263 70% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent:       0 0% 6%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border:       0 0% 10%;
+    --sidebar-ring:         263 70% 58%;
+  }
+
+  /* ----------------------------------------------------------
+     LIGHT MODE STUBS (future — not the primary experience)
+     ---------------------------------------------------------- */
+  .light {
+    --nv-bg:         #ffffff;
+    --nv-surface-0:  #ffffff;
+    --nv-surface-1:  #f8f8f8;
+    --nv-surface-2:  #f0f0f0;
+    --nv-surface-3:  #e8e8e8;
+    --nv-surface-4:  #e0e0e0;
+    --nv-surface-5:  #d8d8d8;
+    --nv-text-primary:   #0a0a0a;
+    --nv-text-secondary: rgba(10, 10, 10, 0.72);
+    --nv-text-muted:     rgba(10, 10, 10, 0.44);
+    --nv-border-subtle:  rgba(0, 0, 0, 0.06);
+    --nv-border-default: rgba(0, 0, 0, 0.10);
+    --nv-border-emphasis:rgba(0, 0, 0, 0.18);
+
+    --background:      0 0% 100%;
+    --foreground:      0 0% 4%;
+    --card:            0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover:         0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary:         263 70% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary:       0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+    --muted:           0 0% 96%;
+    --muted-foreground:0 0% 44%;
+    --accent:          0 0% 96%;
+    --accent-foreground: 0 0% 10%;
+    --destructive:     0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border:          0 0% 90%;
+    --input:           0 0% 90%;
+    --ring:            263 70% 58%;
+  }
+
+  /* ----------------------------------------------------------
+     GLOBAL BASE STYLES
+     ---------------------------------------------------------- */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--nv-bg);
+    color: var(--nv-text-primary);
+    font-family: var(--nv-font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-variation-settings: "opsz" auto;
+    line-height: 1.6;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Typography hierarchy */
+  h1, h2, h3 {
+    font-family: var(--nv-font-sans);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--nv-text-primary);
+    line-height: 1.15;
+  }
+
+  h4, h5, h6 {
+    font-family: var(--nv-font-sans);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--nv-text-primary);
+    line-height: 1.3;
+  }
+
+  /* Editorial serif heading (novel titles, hero text) */
+  .nv-heading-display {
+    font-family: var(--nv-font-serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  p {
+    color: var(--nv-text-secondary);
+    line-height: 1.65;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--nv-transition-fast);
+  }
+
+  a:hover {
+    color: var(--nv-text-primary);
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--nv-focus-ring);
+    border-radius: var(--nv-radius-sm);
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.30);
+    color: var(--nv-text-primary);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--nv-surface-0);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--nv-surface-4);
+    border-radius: var(--nv-radius-full);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--nv-surface-5);
+  }
+
+  /* Image defaults */
+  img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   TAILWIND v4 THEME EXTENSION
+   Exposes nv-* tokens as Tailwind custom properties so that
+   utility classes like bg-nv-surface-1, text-nv-violet-500,
+   shadow-nv-glow all resolve correctly.
+   ============================================================ */
+@theme inline {
+  /* Font families */
+  --font-sans:  var(--nv-font-sans);
+  --font-serif: var(--nv-font-serif);
+  --font-mono:  var(--nv-font-mono);
+
+  /* AMOLED surfaces */
+  --color-nv-bg:        var(--nv-bg);
+  --color-nv-surface-0: var(--nv-surface-0);
+  --color-nv-surface-1: var(--nv-surface-1);
+  --color-nv-surface-2: var(--nv-surface-2);
+  --color-nv-surface-3: var(--nv-surface-3);
+  --color-nv-surface-4: var(--nv-surface-4);
+  --color-nv-surface-5: var(--nv-surface-5);
+
+  /* Violet palette */
+  --color-nv-violet-50:  var(--nv-violet-50);
+  --color-nv-violet-100: var(--nv-violet-100);
+  --color-nv-violet-200: var(--nv-violet-200);
+  --color-nv-violet-300: var(--nv-violet-300);
+  --color-nv-violet-400: var(--nv-violet-400);
+  --color-nv-violet-500: var(--nv-violet-500);
+  --color-nv-violet-600: var(--nv-violet-600);
+  --color-nv-violet-700: var(--nv-violet-700);
+  --color-nv-violet-800: var(--nv-violet-800);
+  --color-nv-violet-900: var(--nv-violet-900);
+  --color-nv-violet-950: var(--nv-violet-950);
+
+  /* Text */
+  --color-nv-text-primary:   var(--nv-text-primary);
+  --color-nv-text-secondary: var(--nv-text-secondary);
+  --color-nv-text-muted:     var(--nv-text-muted);
+  --color-nv-text-disabled:  var(--nv-text-disabled);
+
+  /* Borders */
+  --color-nv-border-subtle:   var(--nv-border-subtle);
+  --color-nv-border-default:  var(--nv-border-default);
+  --color-nv-border-emphasis: var(--nv-border-emphasis);
+  --color-nv-border-accent:   var(--nv-border-accent);
+
+  /* shadcn hsl bridge */
+  --color-background:       hsl(var(--background));
+  --color-foreground:       hsl(var(--foreground));
+  --color-card:             hsl(var(--card));
+  --color-card-foreground:  hsl(var(--card-foreground));
+  --color-primary:          hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary:        hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted:            hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent:           hsl(var(--accent));
+  --color-accent-foreground:hsl(var(--accent-foreground));
+  --color-destructive:      hsl(var(--destructive));
+  --color-border:           hsl(var(--border));
+  --color-input:            hsl(var(--input));
+  --color-ring:             hsl(var(--ring));
+
+  /* Border radius */
+  --radius-nv-xs:   var(--nv-radius-xs);
+  --radius-nv-sm:   var(--nv-radius-sm);
+  --radius-nv-md:   var(--nv-radius-md);
+  --radius-nv-lg:   var(--nv-radius-lg);
+  --radius-nv-xl:   var(--nv-radius-xl);
+  --radius-nv-2xl:  var(--nv-radius-2xl);
+  --radius-nv-3xl:  var(--nv-radius-3xl);
+  --radius-nv-full: var(--nv-radius-full);
+
+  /* Shadows */
+  --shadow-nv-xs:        var(--nv-shadow-xs);
+  --shadow-nv-sm:        var(--nv-shadow-sm);
+  --shadow-nv-card:      var(--nv-shadow-card);
+  --shadow-nv-elevated:  var(--nv-shadow-elevated);
+  --shadow-nv-glow:      var(--nv-shadow-glow);
+  --shadow-nv-glow-lg:   var(--nv-shadow-glow-lg);
+  --shadow-nv-cinematic: var(--nv-shadow-cinematic);
+}
+
+/* ============================================================
+   UTILITY CLASSES (layout & component helpers)
+   ============================================================ */
+@layer utilities {
+
+  /* Page container */
+  .nv-container {
+    width: 100%;
+    max-width: var(--nv-container-2xl);
+    margin-inline: auto;
+    padding-inline: var(--nv-space-6);
+  }
+  @media (min-width: 1280px) {
+    .nv-container { padding-inline: var(--nv-space-8); }
+  }
+  @media (min-width: 1440px) {
+    .nv-container { padding-inline: var(--nv-space-12); }
+  }
+
+  /* Gradient text (NovelVerse brand) */
+  .nv-text-gradient {
+    background: linear-gradient(135deg, var(--nv-violet-400) 0%, var(--nv-violet-300) 50%, #e879f9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Violet glow on hover */
+  .nv-glow-hover {
+    transition: box-shadow var(--nv-transition-base);
+  }
+  .nv-glow-hover:hover {
+    box-shadow: var(--nv-shadow-glow);
+  }
+
+  /* Card base */
+  .nv-card {
+    background: var(--nv-surface-1);
+    border: 1px solid var(--nv-border-subtle);
+    border-radius: var(--nv-radius-xl);
+    box-shadow: var(--nv-shadow-card);
+    transition: border-color var(--nv-transition-base), box-shadow var(--nv-transition-base);
+  }
+  .nv-card:hover {
+    border-color: var(--nv-border-accent);
+    box-shadow: var(--nv-shadow-glow);
+  }
+
+  /* Cinematic overlay gradient */
+  .nv-cinematic-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.60) 40%,
+      rgba(0, 0, 0, 0.10) 100%
+    );
+  }
+
+  /* Subtle top-to-bottom section fade */
+  .nv-section-fade {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(139, 92, 246, 0.04) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Scrollable horizontal strip */
+  .nv-scroll-x {
+    display: flex;
+    gap: var(--nv-space-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nv-scroll-x::-webkit-scrollbar { display: none; }
+  .nv-scroll-x > * { scroll-snap-align: start; }
+
+  /* Glass effect (nav / modals) */
+  .nv-glass {
+    background: rgba(5, 5, 5, 0.80);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--nv-border-subtle);
+  }
+
+  /* Violet shimmer animation (loading skeletons) */
+  .nv-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--nv-surface-1) 0%,
+      var(--nv-surface-3) 50%,
+      var(--nv-surface-1) 100%
+    );
+    background-size: 200% 100%;
+    animation: nv-shimmer 1.6s ease-in-out infinite;
+  }
+
+  @keyframes nv-shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+  }
+
+  /* Fade-in animation */
+  .nv-fade-in {
+    animation: nv-fade-in var(--nv-transition-base) ease-out forwards;
+  }
+  @keyframes nv-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scale hover */
+  .nv-scale-hover {
+    transition: transform var(--nv-transition-spring);
+  }
+  .nv-scale-hover:hover { transform: scale(1.03); }
+
+  /* Carousel progress animation */
+  @keyframes nv-progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  /* Truncate to N lines */
+  .nv-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .nv-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .nv-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
