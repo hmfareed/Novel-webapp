@@ -4,9 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --hot src/index.ts",
-    "start": "NODE_ENV=production bun src/index.ts",
-    "build": "bun run build.ts"
+    "dev": "npm --prefix novelverse-app run dev",
+    "dev:bun": "bun --hot src/index.ts",
+    "build": "npm --prefix novelverse-app run build",
+    "start": "npm --prefix novelverse-app run start",
+    "lint": "npm --prefix novelverse-app run lint",
+    "seed": "npm --prefix novelverse-app run seed"
   },
   "dependencies": {
     "bun-plugin-tailwind": "^0.1.2",
