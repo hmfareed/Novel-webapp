@@ -18,6 +18,9 @@ import {
   Sparkles,
   Search,
   BookOpen,
+  Bot,
+  Radio,
+  Volume2,
 } from "lucide-react";
 import { ChapterReaderProgress } from "@/components/novelverse/reading-progress-bar";
 import { Button } from "@/components/ui/button";
@@ -31,6 +34,7 @@ import {
   isChapterBookmarked,
   toggleBookmark,
 } from "@/lib/reader-storage";
+import { getChapterOfflineIDB } from "@/lib/offline-sync-engine";
 import { ReaderSettingsModal } from "@/components/novelverse/reader/reader-settings-modal";
 import { ReaderTextToolbar } from "@/components/novelverse/reader/reader-text-toolbar";
 import { ReaderAudioPlayer } from "@/components/novelverse/reader/reader-audio-player";
@@ -40,6 +44,8 @@ import { ChapterDiscussionDrawer } from "@/components/novelverse/reader/chapter-
 import { ChapterCompletionModal } from "@/components/novelverse/reader/chapter-completion-modal";
 import { QuoteCardModal } from "@/components/novelverse/reader/quote-card-modal";
 import { OfflineDownloadButton } from "@/components/novelverse/reader/offline-download-manager";
+import { ParagraphCommentsDrawer } from "@/components/novelverse/reader/paragraph-comments-drawer";
+import { ReaderAICompanion } from "@/components/novelverse/reader/reader-ai-companion";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -68,6 +74,16 @@ interface ReaderChapterInfo {
   content: string;
   wordCount: number;
   isPremium?: boolean;
+  scenes?: Array<{
+    order: number;
+    text: string;
+    illustrationUrl?: string;
+    ambientAudioUrl?: string;
+    narrationAudioUrl?: string;
+    musicTrackUrl?: string;
+  }>;
+  openingIllustrationUrl?: string;
+  authorNote?: string;
 }
 
 export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
@@ -103,6 +119,12 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
   const [quoteCardOpen, setQuoteCardOpen] = React.useState(false);
   const [selectedQuote, setSelectedQuote] = React.useState("");
 
+  // Enterprise Features: AI Companion & Paragraph Comments
+  const [aiCompanionOpen, setAiCompanionOpen] = React.useState(false);
+  const [paragraphCommentsOpen, setParagraphCommentsOpen] = React.useState(false);
+  const [activeParagraphIndex, setActiveParagraphIndex] = React.useState(0);
+  const [activeParagraphText, setActiveParagraphText] = React.useState("");
+
   // Text selection state
   const [selectedText, setSelectedText] = React.useState("");
   const [selectionCoords, setSelectionCoords] = React.useState<{ x: number; y: number } | null>(null);
@@ -110,6 +132,7 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
   const [isBookmarked, setIsBookmarked] = React.useState(false);
   const [scrollProgress, setScrollProgress] = React.useState(0);
   const hasTriggeredCompletion = React.useRef(false);
+  const prefetchedChapterRef = React.useRef<number | null>(null);
 
   // Load Settings & Bookmark Status
   React.useEffect(() => {
@@ -121,6 +144,21 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
   React.useEffect(() => {
     async function loadChapter() {
       try {
+        // 1. Try IndexedDB high-speed offline store first
+        const offlineData = await getChapterOfflineIDB(resolvedParams.slug, chapterNum);
+        if (offlineData) {
+          setChapter({
+            chapterNumber: offlineData.chapterNumber,
+            title: offlineData.title,
+            content: offlineData.content,
+            wordCount: offlineData.wordCount,
+            scenes: offlineData.scenes,
+          });
+          setIsLoading(false);
+          // Still fetch in background to sync any updates
+        }
+
+        // 2. Fetch fresh from API
         const res = await fetch(`/api/novels/${resolvedParams.slug}/chapters/${chapterNum}`);
         if (res.ok) {
           const data = await res.json();
@@ -135,7 +173,7 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
           }
         }
       } catch {
-        // Fallback
+        // Fallback to seed
       }
 
       if (seedFallback && seedChapterFallback) {
@@ -155,6 +193,14 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
 
     loadChapter();
   }, [resolvedParams.slug, chapterNum, seedFallback, seedChapterFallback]);
+
+  // Zero-latency background prefetching for the next chapter (second-plan §7)
+  React.useEffect(() => {
+    if (scrollProgress >= 50 && prefetchedChapterRef.current !== chapterNum + 1) {
+      prefetchedChapterRef.current = chapterNum + 1;
+      fetch(`/api/novels/${resolvedParams.slug}/chapters/${chapterNum + 1}`).catch(() => {});
+    }
+  }, [scrollProgress, chapterNum, resolvedParams.slug]);
 
   // Active reading duration tracker with idle detection
   const lastSyncTimeRef = React.useRef<number>(0);
@@ -464,6 +510,16 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
               }}
             />
 
+            {/* AI Reading Companion Trigger (second-plan §24) */}
+            <button
+              onClick={() => setAiCompanionOpen(true)}
+              className="p-2 rounded-xl border bg-violet-950/80 border-violet-500/40 text-violet-300 hover:text-white hover:bg-violet-900/80 transition-colors flex items-center gap-1.5 text-xs font-semibold"
+              title="Ask AI Companion (Spoiler-safe)"
+            >
+              <Bot className="w-4 h-4 text-violet-400" />
+              <span className="hidden md:inline">AI Companion</span>
+            </button>
+
             {/* Settings Dialog Trigger */}
             <button
               onClick={() => setSettingsOpen(true)}
@@ -521,7 +577,7 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
           </p>
         </div>
 
-        {/* Chapter Prose with Typography Settings */}
+        {/* Chapter Prose or Cinematic Scene Breakdown (second-plan §8 & §23) */}
         <article
           className={cn(
             "prose max-w-none transition-all",
@@ -532,11 +588,68 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
             settings.paragraphSpacing === "spacious" ? "space-y-8" : "space-y-6"
           )}
         >
-          {chapter.content.split("\n\n").map((paragraph, idx) => (
-            <p key={idx} className="transition-all">
-              {paragraph}
-            </p>
-          ))}
+          {chapter.scenes && chapter.scenes.length > 0 ? (
+            <div className="space-y-12">
+              {chapter.scenes.map((scene, sIdx) => (
+                <div key={sIdx} className="space-y-6 p-6 rounded-3xl bg-zinc-950/40 border border-white/5">
+                  <div className="flex items-center justify-between text-xs text-zinc-500 border-b border-white/5 pb-2">
+                    <span className="uppercase font-bold tracking-widest text-violet-400">
+                      Scene {scene.order}
+                    </span>
+                    {scene.ambientAudioUrl && (
+                      <span className="flex items-center gap-1 text-emerald-400">
+                        <Volume2 className="w-3 h-3" /> Ambient Sound Active
+                      </span>
+                    )}
+                  </div>
+
+                  {scene.illustrationUrl && (
+                    <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden my-4 border border-white/10">
+                      <img
+                        src={scene.illustrationUrl}
+                        alt={`Scene ${scene.order}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+
+                  {scene.text.split("\n\n").map((paragraph, pIdx) => (
+                    <div key={pIdx} className="group relative transition-all">
+                      <p className="transition-all">{paragraph}</p>
+                      <button
+                        onClick={() => {
+                          setActiveParagraphIndex(pIdx);
+                          setActiveParagraphText(paragraph);
+                          setParagraphCommentsOpen(true);
+                        }}
+                        className="absolute -right-8 top-1 opacity-0 group-hover:opacity-100 p-1.5 rounded-lg bg-zinc-900 border border-white/10 text-zinc-400 hover:text-violet-400 hover:border-violet-500/40 transition-all text-xs"
+                        title="Discuss this paragraph"
+                      >
+                        <MessageSquare className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : (
+            chapter.content.split("\n\n").map((paragraph, idx) => (
+              <div key={idx} className="group relative transition-all">
+                <p className="transition-all">{paragraph}</p>
+                <button
+                  onClick={() => {
+                    setActiveParagraphIndex(idx);
+                    setActiveParagraphText(paragraph);
+                    setParagraphCommentsOpen(true);
+                  }}
+                  className="absolute -right-8 top-1 opacity-0 group-hover:opacity-100 p-1.5 rounded-lg bg-zinc-900 border border-white/10 text-zinc-400 hover:text-violet-400 hover:border-violet-500/40 transition-all text-xs"
+                  title="Discuss this paragraph"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ))
+          )}
         </article>
 
         {/* Chapter Reactions Widget (Module 16) */}
@@ -682,6 +795,25 @@ export default function ChapterReaderPage({ params }: ChapterReaderPageProps) {
         onOpenChange={setSettingsOpen}
         settings={settings}
         onSettingsChange={setSettings}
+      />
+
+      {/* Inline Paragraph Comments Drawer (second-plan §19) */}
+      <ParagraphCommentsDrawer
+        isOpen={paragraphCommentsOpen}
+        onClose={() => setParagraphCommentsOpen(false)}
+        novelSlug={novel.slug}
+        chapterNumber={chapterNum}
+        paragraphIndex={activeParagraphIndex}
+        paragraphText={activeParagraphText}
+      />
+
+      {/* AI Reading Companion Drawer (second-plan §24) */}
+      <ReaderAICompanion
+        isOpen={aiCompanionOpen}
+        onClose={() => setAiCompanionOpen(false)}
+        novelTitle={novel.title}
+        novelSlug={novel.slug}
+        currentChapterNumber={chapterNum}
       />
     </div>
   );

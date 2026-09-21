@@ -27,6 +27,12 @@ import {
   TrendingUp,
   RotateCcw,
   Clock,
+  Radio,
+  Feather,
+  BookOpen,
+  ShieldCheck,
+  Bookmark,
+  Share2,
 } from "lucide-react";
 import { Navbar } from "@/components/novelverse/navbar";
 import { Footer } from "@/components/novelverse/footer";
@@ -50,9 +56,12 @@ interface HeroNovel {
   phrase: string;
   backdropUrl: string;
   coverUrl: string;
+  contentClass: "COMMUNITY" | "STUDIO_ORIGINAL" | "PUBLIC_DOMAIN";
   author: {
     name: string;
     avatar: string;
+    verified?: boolean;
+    roleLabel?: string;
   };
 }
 
@@ -68,9 +77,12 @@ const HERO_NOVELS: HeroNovel[] = [
     phrase: "A crippled prince rises to wield the ancient bow of iron and defeat the sorcerer king.",
     backdropUrl: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=1600&auto=format&fit=crop",
     coverUrl: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=800&auto=format&fit=crop",
+    contentClass: "STUDIO_ORIGINAL",
     author: {
       name: "Djeli Mamadou Kouyaté",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+      roleLabel: "Platform Original",
     },
   },
   {
@@ -84,9 +96,12 @@ const HERO_NOVELS: HeroNovel[] = [
     phrase: "From the mist-cloaked Transylvanian peaks to Victorian London—the eternal king of the undead awakens.",
     backdropUrl: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=1600&auto=format&fit=crop",
     coverUrl: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800&auto=format&fit=crop",
+    contentClass: "PUBLIC_DOMAIN",
     author: {
       name: "Bram Stoker",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+      roleLabel: "Classic Archive",
     },
   },
   {
@@ -100,9 +115,12 @@ const HERO_NOVELS: HeroNovel[] = [
     phrase: "Eliminate the impossible, and whatever remains, however improbable, must be the truth.",
     backdropUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1600&auto=format&fit=crop",
     coverUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop",
+    contentClass: "PUBLIC_DOMAIN",
     author: {
       name: "Arthur Conan Doyle",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+      roleLabel: "Classic Archive",
     },
   },
   {
@@ -116,9 +134,12 @@ const HERO_NOVELS: HeroNovel[] = [
     phrase: "A leap into the year 802,701 A.D. reveals the sunlit paradise of the Eloi and the horrors beneath.",
     backdropUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
     coverUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
+    contentClass: "PUBLIC_DOMAIN",
     author: {
       name: "H.G. Wells",
       avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+      roleLabel: "Classic Archive",
     },
   },
   {
@@ -132,18 +153,60 @@ const HERO_NOVELS: HeroNovel[] = [
     phrase: "Armed with silver thread and unmatched cunning, the spider trickster wins all the stories of the world.",
     backdropUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1600&auto=format&fit=crop",
     coverUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop",
+    contentClass: "COMMUNITY",
     author: {
       name: "Kwame Asante",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+      verified: true,
+      roleLabel: "Community Creator",
     },
   },
+];
+
+interface HomeNovelItem {
+  id?: string;
+  slug: string;
+  title: string;
+  synopsis?: string;
+  coverUrl?: string;
+  author?: { name: string; username?: string; avatar?: string };
+  genres?: Array<{ id?: string; name: string; slug?: string }>;
+  subgenres?: string[];
+  tropes?: string[];
+  moods?: string[];
+  contentClass?: "COMMUNITY" | "STUDIO_ORIGINAL" | "PUBLIC_DOMAIN" | "LICENSED";
+  novelFormat?: "STANDARD" | "ENHANCED" | "CINEMATIC" | "AUDIO";
+  aiAssisted?: boolean;
+  aiAssistedLabel?: string;
+  rating?: number;
+  readCount?: number;
+  chapterCount?: number;
+  pageCount?: number;
+  source?: string;
+  featured?: boolean;
+  category?: string;
+  isReadable?: boolean;
+  previewUrl?: string;
+}
+
+const TROPES_LIST = [
+  { label: "All Tropes", id: "all" },
+  { label: "Found Family", id: "found_family" },
+  { label: "Enemies to Lovers", id: "enemies_to_lovers" },
+  { label: "Revenge Arc", id: "revenge" },
+  { label: "Chosen One", id: "chosen_one" },
+  { label: "Political Intrigue", id: "political_intrigue" },
+  { label: "Slow Burn", id: "slow_burn" },
 ];
 
 export default function HomePage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [contentFilter, setContentFilter] = useState<"all" | "COMMUNITY" | "STUDIO_ORIGINAL" | "PUBLIC_DOMAIN">("all");
+  const [selectedTrope, setSelectedTrope] = useState<string>("all");
   const [exploreFilter, setExploreFilter] = useState<"all" | "trending" | "popular" | "new">("all");
   const [continueReadingItem, setContinueReadingItem] = useState<LocalReadingProgressItem | null>(null);
+  const [apiNovels, setApiNovels] = useState<HomeNovelItem[]>([]);
 
   const nextSlide = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % HERO_NOVELS.length);
@@ -157,7 +220,7 @@ export default function HomePage() {
     if (isPaused) return;
     const timer = setInterval(() => {
       nextSlide();
-    }, 4500);
+    }, 5000);
     return () => clearInterval(timer);
   }, [isPaused, nextSlide]);
 
@@ -182,9 +245,72 @@ export default function HomePage() {
     }
   }, []);
 
+  useEffect(() => {
+    async function loadNovels() {
+      try {
+        const res = await fetch("/api/novels?limit=40");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && Array.isArray(data.novels) && data.novels.length > 0) {
+            setApiNovels(data.novels);
+            return;
+          }
+        }
+      } catch {
+        // Use seed data on fallback
+      }
+      setApiNovels(
+        SEED_NOVELS.map((n) => {
+          const isGutenberg =
+            n.slug === "dracula" ||
+            n.slug === "the-adventures-of-sherlock-holmes" ||
+            n.slug === "the-time-machine" ||
+            n.slug === "pride-and-prejudice";
+          const isOriginal = n.slug === "sundiata-lion-of-mali";
+          return {
+            ...n,
+            source: isGutenberg ? "gutenberg" : "manual",
+            contentClass: isGutenberg ? "PUBLIC_DOMAIN" : isOriginal ? "STUDIO_ORIGINAL" : "COMMUNITY",
+            novelFormat: isOriginal ? "ENHANCED" : "STANDARD",
+            aiAssisted: isOriginal,
+            aiAssistedLabel: isOriginal ? "Platform Studio · Enhanced" : undefined,
+            isReadable: true,
+            isPublicDomain: isGutenberg,
+          };
+        })
+      );
+    }
+    loadNovels();
+  }, []);
+
+  const novelsPool: HomeNovelItem[] = apiNovels.length > 0 ? apiNovels : SEED_NOVELS;
   const activeNovel = HERO_NOVELS[activeIndex];
   const secondaryHeroNovels = HERO_NOVELS.filter((_, idx) => idx !== activeIndex).slice(0, 3);
   const ActiveBadgeIcon = activeNovel.badge.icon;
+
+  // Tri-arch + explore filtering
+  const filteredNovels = novelsPool.filter((novel) => {
+    if (contentFilter !== "all" && novel.contentClass !== contentFilter) {
+      return false;
+    }
+    if (exploreFilter === "trending") return novel.featured || novel.category === "trending";
+    if (exploreFilter === "popular") return (novel.readCount || 0) > 40000;
+    if (exploreFilter === "new") return novel.category === "new_releases" || (novel.chapterCount || 0) <= 5;
+    return true;
+  });
+
+  const getSourceBadge = (source?: string, contentClass?: string) => {
+    if (contentClass === "STUDIO_ORIGINAL") {
+      return { label: "Studio Original", bg: "bg-amber-950/90 text-amber-300 border-amber-500/50" };
+    }
+    if (contentClass === "COMMUNITY") {
+      return { label: "Community Author", bg: "bg-emerald-950/90 text-emerald-300 border-emerald-500/50" };
+    }
+    if (source === "gutenberg" || contentClass === "PUBLIC_DOMAIN") {
+      return { label: "Public Domain", bg: "bg-cyan-950/90 text-cyan-300 border-cyan-600/50" };
+    }
+    return { label: "NovelVerse", bg: "bg-violet-950/90 text-violet-300 border-violet-600/50" };
+  };
 
   const genreGrid = [
     { name: "African Stories", icon: <Sparkles className="w-4 h-4 text-amber-400" />, href: "/explore?genre=African Stories" },
@@ -201,89 +327,13 @@ export default function HomePage() {
     { name: "All Genres", icon: <Grid className="w-4 h-4 text-zinc-400" />, href: "/explore" },
   ];
 
-  interface HomeNovelItem {
-    id?: string;
-    slug: string;
-    title: string;
-    synopsis?: string;
-    coverUrl?: string;
-    author?: { name: string };
-    genres?: Array<{ id?: string; name: string; slug?: string }>;
-    rating?: number;
-    readCount?: number;
-    chapterCount?: number;
-    pageCount?: number;
-    source?: string;
-    featured?: boolean;
-    category?: string;
-    isReadable?: boolean;
-    previewUrl?: string;
-  }
-
-  const [apiNovels, setApiNovels] = useState<HomeNovelItem[]>([]);
-
-  useEffect(() => {
-    async function loadNovels() {
-      try {
-        const res = await fetch("/api/novels?limit=40");
-        if (res.ok) {
-          const data = await res.json();
-          if (data.success && Array.isArray(data.novels) && data.novels.length > 0) {
-            setApiNovels(data.novels);
-            return;
-          }
-        }
-      } catch {
-        // Fallback
-      }
-      setApiNovels(
-        SEED_NOVELS.map((n) => {
-          const isGutenberg =
-            n.slug === "dracula" ||
-            n.slug === "the-adventures-of-sherlock-holmes" ||
-            n.slug === "the-time-machine" ||
-            n.slug === "pride-and-prejudice";
-          return {
-            ...n,
-            source: isGutenberg ? "gutenberg" : "manual",
-            isReadable: true,
-            isPublicDomain: isGutenberg,
-          };
-        })
-      );
-    }
-    loadNovels();
-  }, []);
-
-  const novelsPool: HomeNovelItem[] = apiNovels.length > 0 ? apiNovels : SEED_NOVELS;
-
-  const filteredExploreNovels = novelsPool.filter((novel) => {
-    if (exploreFilter === "trending") return novel.featured || novel.category === "trending";
-    if (exploreFilter === "popular") return (novel.readCount || 0) > 50000;
-    if (exploreFilter === "new") return novel.category === "new_releases" || (novel.chapterCount || 0) < 20;
-    return true;
-  }).slice(0, 8);
-
-  const getSourceBadge = (source?: string) => {
-    switch (source) {
-      case "gutenberg":
-        return { label: "Gutenberg", bg: "bg-cyan-950/90 text-cyan-300 border-cyan-600/50" };
-      case "openlibrary":
-        return { label: "Open Library", bg: "bg-amber-950/90 text-amber-300 border-amber-600/50" };
-      case "googlebooks":
-        return { label: "Google Books", bg: "bg-blue-950/90 text-blue-300 border-blue-600/50" };
-      default:
-        return { label: "Original", bg: "bg-violet-950/90 text-violet-300 border-violet-600/50" };
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#07090e] text-white selection:bg-violet-600/30 selection:text-white flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1">
         {/* ============================================================
-            SECTION 1: HOME (Cinematic Dynamic Hero Carousel)
+            HERO CAROUSEL: CINEMATIC ECOSYSTEM SHOWCASE
             ============================================================ */}
         <section
           id="home"
@@ -312,7 +362,7 @@ export default function HomePage() {
 
           <div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* Left Column: Hero Text */}
+              {/* Left Column: Story Details & Actions */}
               <div className="lg:col-span-6 space-y-6">
                 <div className="flex flex-wrap items-center gap-2.5">
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-violet-950/80 border border-violet-600/50 text-violet-300 text-xs font-semibold backdrop-blur-md shadow-sm">
@@ -358,7 +408,7 @@ export default function HomePage() {
                 </p>
 
                 <div className="flex items-center gap-3 pt-1">
-                  <div className="w-7 h-7 rounded-full overflow-hidden relative border border-white/20">
+                  <div className="w-8 h-8 rounded-full overflow-hidden relative border border-violet-400/40">
                     <Image
                       src={activeNovel.author.avatar}
                       alt={activeNovel.author.name}
@@ -366,9 +416,14 @@ export default function HomePage() {
                       className="object-cover"
                     />
                   </div>
-                  <span className="text-xs text-zinc-300">
-                    Written by <strong className="text-white font-semibold">{activeNovel.author.name}</strong>
-                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-zinc-300">
+                      By <strong className="text-white font-semibold">{activeNovel.author.name}</strong>
+                    </span>
+                    <span className="text-[10px] text-violet-400 font-mono">
+                      {activeNovel.author.roleLabel || "Creator"}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -378,7 +433,7 @@ export default function HomePage() {
                       className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold px-7 h-12 rounded-2xl shadow-lg shadow-violet-600/30 border border-violet-400/30 transition-all hover:scale-105 flex items-center gap-2 text-sm"
                     >
                       <Play className="w-4 h-4 fill-white" />
-                      Read Now (Free)
+                      Read Chapter 1 Free
                     </Button>
                   </Link>
 
@@ -389,7 +444,7 @@ export default function HomePage() {
                       className="border-white/15 bg-zinc-950/70 hover:bg-zinc-900 text-zinc-200 hover:text-white font-medium px-6 h-12 rounded-2xl backdrop-blur-md transition-all hover:border-white/30 flex items-center gap-2 text-sm"
                     >
                       <Info className="w-4 h-4 text-violet-400" />
-                      Novel Details
+                      Story Overview
                     </Button>
                   </Link>
                 </div>
@@ -436,6 +491,9 @@ export default function HomePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 
                       <div className="relative z-10 p-5 space-y-2">
+                        <span className="text-[10px] uppercase font-bold tracking-widest text-violet-300 bg-violet-950/80 px-2.5 py-0.5 rounded-full border border-violet-600/40">
+                          {activeNovel.contentClass.replace("_", " ")}
+                        </span>
                         <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors">
                           {activeNovel.title}
                         </h3>
@@ -484,14 +542,14 @@ export default function HomePage() {
         </section>
 
         {/* ============================================================
-            MODULE 1 & 4: SMART CONTINUE READING HERO BAR
+            MODULE: SMART "CONTINUE YOUR STORY" RESUME BAR
             ============================================================ */}
         {continueReadingItem && (
           <section className="py-6 border-b border-white/5 bg-gradient-to-r from-violet-950/40 via-zinc-950 to-zinc-950">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="p-5 rounded-3xl bg-zinc-900/80 border border-violet-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl backdrop-blur-xl">
                 <div className="flex items-center gap-4 min-w-0">
-                  <div className="w-12 h-16 rounded-2xl overflow-hidden relative shrink-0 border border-white/10 bg-zinc-900">
+                  <div className="w-14 h-18 rounded-2xl overflow-hidden relative shrink-0 border border-white/10 bg-zinc-900">
                     <img
                       src={continueReadingItem.novelCoverUrl}
                       alt={continueReadingItem.novelTitle}
@@ -502,7 +560,7 @@ export default function HomePage() {
                   <div className="min-w-0 space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-violet-400 bg-violet-950/80 px-2 py-0.5 rounded-full border border-violet-500/20">
-                        Continue Reading
+                        Continue Your Story
                       </span>
                       <span className="text-[11px] text-zinc-400 font-mono">
                         Chapter {continueReadingItem.chapterNumber} • {continueReadingItem.percentage}% complete
@@ -511,7 +569,7 @@ export default function HomePage() {
                     <h3 className="text-base font-bold text-white truncate">
                       {continueReadingItem.novelTitle}
                     </h3>
-                    <div className="w-48 bg-zinc-800 rounded-full h-1.5 overflow-hidden mt-1">
+                    <div className="w-56 bg-zinc-800 rounded-full h-1.5 overflow-hidden mt-1">
                       <div
                         className="bg-gradient-to-r from-violet-500 to-indigo-400 h-full rounded-full"
                         style={{ width: `${continueReadingItem.percentage}%` }}
@@ -534,52 +592,75 @@ export default function HomePage() {
         )}
 
         {/* ============================================================
-            SECTION 2: DISCOVER NOVELS & EXPLORE
+            TRI-ARCH CATALOG & MULTI-DIMENSIONAL DISCOVERY
             ============================================================ */}
         <section id="explore" className="scroll-mt-16 py-16 border-b border-white/5 bg-zinc-950/30">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
+            {/* Header + Tri-Arch Content Switcher */}
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-950/60 border border-violet-800/40 text-violet-300 text-xs font-semibold mb-3">
                   <TrendingUp className="w-3.5 h-3.5 text-violet-400" />
-                  DISCOVER STORIES
+                  LIVING ECOSYSTEM
                 </div>
                 <h2 className="text-3xl font-extrabold text-white tracking-tight">
-                  Explore Curated Novels
+                  Discover Novels Across 3 Worlds
                 </h2>
                 <p className="text-xs text-zinc-400 mt-1 max-w-xl">
-                  Hand-crafted epics, dark mysteries, romantic thrillers, and immersive worldbuilding—100% free with zero paywalls.
+                  Explore original studio productions, stories by verified community authors, and public domain classics.
                 </p>
               </div>
 
-              {/* Filter Tabs */}
-              <div className="flex flex-wrap items-center gap-2">
+              {/* Three-Pillar Content Filter Buttons (second-plan §1) */}
+              <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-zinc-900/90 border border-white/10">
                 {[
-                  { id: "all", label: "All Stories", icon: Layers },
-                  { id: "trending", label: "🔥 Trending", icon: Flame },
-                  { id: "popular", label: "⭐ Popular", icon: Crown },
-                  { id: "new", label: "✨ New Drops", icon: Sparkles },
-                ].map((tab) => (
+                  { id: "all", label: "All Catalog", icon: Layers },
+                  { id: "COMMUNITY", label: "Community Stories", icon: Feather },
+                  { id: "STUDIO_ORIGINAL", label: "Studio Originals", icon: Sparkles },
+                  { id: "PUBLIC_DOMAIN", label: "Classics", icon: Landmark },
+                ].map((item) => (
                   <button
-                    key={tab.id}
-                    onClick={() => setExploreFilter(tab.id as typeof exploreFilter)}
+                    key={item.id}
+                    onClick={() => setContentFilter(item.id as typeof contentFilter)}
                     className={cn(
                       "px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5",
-                      exploreFilter === tab.id
-                        ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30 border border-violet-400/30 font-semibold"
-                        : "bg-zinc-900/80 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-white/5"
+                      contentFilter === item.id
+                        ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30 font-semibold"
+                        : "text-zinc-400 hover:text-white hover:bg-zinc-800"
                     )}
                   >
-                    <span>{tab.label}</span>
+                    <item.icon className="w-3.5 h-3.5" />
+                    <span>{item.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Novel Cards Grid */}
+            {/* Trope & Story Mood Pills (second-plan §12) */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+              <span className="text-xs text-zinc-500 font-semibold whitespace-nowrap pl-1">
+                Story Tropes:
+              </span>
+              {TROPES_LIST.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setSelectedTrope(t.id)}
+                  className={cn(
+                    "px-3 py-1 rounded-full text-[11px] font-medium transition-all whitespace-nowrap border",
+                    selectedTrope === t.id
+                      ? "bg-violet-500/20 text-violet-300 border-violet-500/50"
+                      : "bg-zinc-900/60 text-zinc-400 border-white/5 hover:border-white/20 hover:text-white"
+                  )}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Curated Grid of Novels */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-              {filteredExploreNovels.map((novel) => {
-                const badge = getSourceBadge(novel.source);
+              {filteredNovels.slice(0, 8).map((novel) => {
+                const badge = getSourceBadge(novel.source, novel.contentClass);
                 const hasChapters = (novel.chapterCount || 0) > 0;
 
                 return (
@@ -599,7 +680,7 @@ export default function HomePage() {
                       </Link>
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 pointer-events-none" />
 
-                      {/* Source Badge Pill */}
+                      {/* Content Classification Pill */}
                       <span
                         className={cn(
                           "absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md text-[9px] font-bold border backdrop-blur-md shadow-md",
@@ -608,6 +689,13 @@ export default function HomePage() {
                       >
                         {badge.label}
                       </span>
+
+                      {novel.novelFormat === "ENHANCED" && (
+                        <span className="absolute top-2.5 right-2.5 px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-purple-950/80 text-purple-300 border border-purple-500/40 flex items-center gap-1">
+                          <Radio className="w-2.5 h-2.5 text-purple-400" />
+                          Audio+Scene
+                        </span>
+                      )}
 
                       <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px] text-zinc-200">
                         <span className="flex items-center gap-1 font-bold text-amber-400 bg-black/60 px-2 py-0.5 rounded-md backdrop-blur-sm">
@@ -645,7 +733,7 @@ export default function HomePage() {
                       </div>
 
                       <div className="pt-2 border-t border-white/5 flex items-center justify-between">
-                        <span className="text-[11px] text-zinc-400 truncate">
+                        <span className="text-[11px] text-zinc-400 truncate max-w-[110px]">
                           {novel.author?.name || "Author"}
                         </span>
 
@@ -660,16 +748,6 @@ export default function HomePage() {
                               Read
                             </Button>
                           </Link>
-                        ) : novel.previewUrl ? (
-                          <a href={novel.previewUrl} target="_blank" rel="noreferrer">
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="h-7 px-2.5 text-[10px] text-blue-400 hover:text-white hover:bg-blue-600/30 rounded-lg gap-1 font-semibold"
-                            >
-                              Preview
-                            </Button>
-                          </a>
                         ) : (
                           <Link href={`/novels/${novel.slug}`}>
                             <Button
@@ -677,7 +755,7 @@ export default function HomePage() {
                               variant="ghost"
                               className="h-7 px-2.5 text-[10px] text-zinc-400 hover:text-white hover:bg-white/10 rounded-lg gap-1 font-semibold"
                             >
-                              Details
+                              Overview
                             </Button>
                           </Link>
                         )}
@@ -688,13 +766,13 @@ export default function HomePage() {
               })}
             </div>
 
-            <div className="mt-10 text-center">
+            <div className="mt-8 text-center">
               <Link href="/explore">
                 <Button
                   size="lg"
                   className="bg-zinc-900 hover:bg-zinc-800 border border-white/10 hover:border-violet-500/40 text-white text-xs font-bold px-8 h-12 rounded-2xl transition-all gap-2"
                 >
-                  <span>Browse All Novels with Filters & Sort</span>
+                  <span>Explore Full Catalog with Search & Filters</span>
                   <ChevronRight className="w-4 h-4 text-violet-400" />
                 </Button>
               </Link>
@@ -703,13 +781,58 @@ export default function HomePage() {
         </section>
 
         {/* ============================================================
-            SECTION 3: 12 GENRES EXPLORATION GRID (Filtered Links)
+            SOCIAL ECOSYSTEM: LIVE ACTIVITY & BOOK CLUBS (second-plan §4, 5, 6)
+            ============================================================ */}
+        <section className="py-16 border-b border-white/5 bg-black">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Left Column: Live Reading Feed */}
+              <div className="lg:col-span-6">
+                <FriendsActivityFeed maxItems={4} />
+              </div>
+
+              {/* Right Column: Book Clubs & Reading Together */}
+              <div className="lg:col-span-6 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-violet-950/40 via-zinc-950 to-zinc-950 border border-violet-500/20 flex flex-col justify-between space-y-5">
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-950/80 border border-violet-500/30 text-xs font-bold text-violet-300">
+                    <Users className="w-3.5 h-3.5 text-violet-400" />
+                    Community Reading Clubs
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-white">
+                    Read Together in Real-Time Book Clubs
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    Join live reading circles, discuss pivotal plot turns without spoilers, share paragraph reactions, and track reading milestones with fellow book lovers.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <Link href="/community">
+                    <Button className="rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-xs font-bold px-6 py-5 shadow-lg shadow-violet-600/30 flex items-center gap-2">
+                      <Users className="w-4 h-4" />
+                      Explore Book Clubs
+                    </Button>
+                  </Link>
+
+                  <Link href="/schedule">
+                    <Button variant="outline" className="rounded-2xl border-white/10 text-xs font-bold py-5 px-5">
+                      Reading Routine
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            SECTION: 12 GENRES EXPLORATION GRID
             ============================================================ */}
         <section id="genres" className="py-16 border-b border-white/5 bg-zinc-950/60">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
               <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
-                Explore Genres under Browse
+                Explore Genres
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-white">
                 Find Your Next Obsession
@@ -731,51 +854,6 @@ export default function HomePage() {
                   </span>
                 </Link>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================
-            SECTION 4: READING SCHEDULE & HABIT ROUTINES
-            ============================================================ */}
-        <section className="py-16 border-b border-white/5 bg-black">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              {/* Left Column: Live Friends Stream */}
-              <div className="lg:col-span-6">
-                <FriendsActivityFeed maxItems={4} />
-              </div>
-
-              {/* Right Column: Schedule & Routine Teaser */}
-              <div className="lg:col-span-6 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-violet-950/40 via-zinc-950 to-zinc-950 border border-violet-500/20 flex flex-col justify-between space-y-5">
-                <div className="space-y-3">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-950/80 border border-violet-500/30 text-xs font-bold text-violet-300">
-                    <Calendar className="w-3.5 h-3.5 text-violet-400" />
-                    Reading Schedule & Routines
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white">
-                    Schedule Times to Read Your Favorite Novels
-                  </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
-                    Set weekly reading time slots, pick target chapter goals, and receive gentle reminder alerts to build an unbreakable reading habit.
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3 pt-2">
-                  <Link href="/schedule">
-                    <Button className="rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-xs font-bold px-6 py-5 shadow-lg shadow-violet-600/30 flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      Open Reading Schedule
-                    </Button>
-                  </Link>
-
-                  <Link href="/bookmarks">
-                    <Button variant="outline" className="rounded-2xl border-white/10 text-xs font-bold py-5 px-5">
-                      View Bookmarks
-                    </Button>
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </section>

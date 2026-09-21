@@ -23,6 +23,13 @@ export interface INovelGenre {
   slug: string;
 }
 
+export interface ICopyrightDeclaration {
+  confirmed: boolean;              // author checked the declaration checkbox
+  confirmedAt?: Date;
+  license: "ALL_RIGHTS_RESERVED" | "CC_BY" | "CC_BY_SA" | "CC0_PUBLIC_DOMAIN";
+  statementText?: string;          // optional personal statement
+}
+
 export interface INovel extends Document {
   slug: string;
   title: string;
@@ -33,21 +40,46 @@ export interface INovel extends Document {
   bannerUrl?: string;
   author: INovelAuthor;
   genres: INovelGenre[];
+
+  // Multi-dimensional taxonomy (second-plan §12)
+  subgenres: string[];             // e.g. ["Epic Fantasy", "Dark Fantasy"]
+  themes: string[];                // e.g. ["Revenge", "Found Family", "Chosen One"]
+  tropes: string[];                // e.g. ["Enemies to Lovers", "Slow Burn"]
+  moods: string[];                 // e.g. ["Dark", "Comforting", "Suspenseful"]
+  contentWarnings: string[];       // e.g. ["Violence", "Strong Language"]
+
   tags: string[];
   status: NovelStatus;
   rating: number;
   reviewCount: number;
   readCount: number;
+  followersCount: number;          // users following this novel for updates
   chapterCount: number;
   wordCount: number;
+  estimatedReadingMinutes: number; // derived: wordCount / 200 avg reading speed
+
   isPremium: boolean;
   isCompleted: boolean;
   featured: boolean;
+
+  // Content classification (second-plan §29)
+  contentClass: "COMMUNITY" | "STUDIO_ORIGINAL" | "PUBLIC_DOMAIN" | "LICENSED";
+  // Novel format (second-plan §8)
+  novelFormat: "STANDARD" | "ENHANCED" | "CINEMATIC" | "AUDIO";
+  // AI disclosure (second-plan §28)
+  aiAssisted: boolean;
+  aiAssistedLabel?: string;        // e.g. "AI-assisted · Written by Mohammed Fareed"
+
   mood?: string;
   category?: "african_stories" | "dark_fantasy" | "trending" | "popular" | "new_releases";
   storyDna: IStoryDNA;
   ageRating: string;
   language: string;
+  languages: string[];             // multi-language support
+
+  // Copyright (second-plan §17)
+  copyright: ICopyrightDeclaration;
+
   publisher?: string;
   publishedDate?: string;
   isbn10?: string;
@@ -89,6 +121,14 @@ const NovelSchema = new Schema<INovel>(
         slug: { type: String, required: true },
       },
     ],
+
+    // Multi-dimensional taxonomy
+    subgenres: [{ type: String }],
+    themes: [{ type: String }],
+    tropes: [{ type: String }],
+    moods: [{ type: String }],
+    contentWarnings: [{ type: String }],
+
     tags: [{ type: String }],
     status: {
       type: String,
@@ -99,6 +139,7 @@ const NovelSchema = new Schema<INovel>(
         "APPROVED",
         "SCHEDULED",
         "PUBLISHED",
+        "ONGOING",
         "REJECTED",
         "SUSPENDED",
         "COMPLETED",
@@ -111,11 +152,29 @@ const NovelSchema = new Schema<INovel>(
     rating: { type: Number, default: 0, min: 0, max: 5 },
     reviewCount: { type: Number, default: 0 },
     readCount: { type: Number, default: 0 },
+    followersCount: { type: Number, default: 0 },
     chapterCount: { type: Number, default: 0 },
     wordCount: { type: Number, default: 0 },
+    estimatedReadingMinutes: { type: Number, default: 0 },
     isPremium: { type: Boolean, default: false },
     isCompleted: { type: Boolean, default: false },
     featured: { type: Boolean, default: false, index: true },
+
+    // Content classification
+    contentClass: {
+      type: String,
+      enum: ["COMMUNITY", "STUDIO_ORIGINAL", "PUBLIC_DOMAIN", "LICENSED"],
+      default: "COMMUNITY",
+      index: true,
+    },
+    novelFormat: {
+      type: String,
+      enum: ["STANDARD", "ENHANCED", "CINEMATIC", "AUDIO"],
+      default: "STANDARD",
+    },
+    aiAssisted: { type: Boolean, default: false, index: true },
+    aiAssistedLabel: { type: String, default: "" },
+
     mood: { type: String, default: "" },
     category: { type: String, default: "popular" },
     storyDna: {
@@ -127,6 +186,20 @@ const NovelSchema = new Schema<INovel>(
     },
     ageRating: { type: String, default: "16+" },
     language: { type: String, default: "English" },
+    languages: [{ type: String }],
+
+    // Copyright declaration
+    copyright: {
+      confirmed: { type: Boolean, default: false },
+      confirmedAt: { type: Date },
+      license: {
+        type: String,
+        enum: ["ALL_RIGHTS_RESERVED", "CC_BY", "CC_BY_SA", "CC0_PUBLIC_DOMAIN"],
+        default: "ALL_RIGHTS_RESERVED",
+      },
+      statementText: { type: String, default: "" },
+    },
+
     publisher: { type: String, default: "" },
     publishedDate: { type: String, default: "" },
     isbn10: { type: String, default: "" },
@@ -159,6 +232,9 @@ const NovelSchema = new Schema<INovel>(
 NovelSchema.index({ "genres.slug": 1 });
 NovelSchema.index({ rating: -1, readCount: -1 });
 NovelSchema.index({ source: 1, sourceId: 1 }, { sparse: true });
+NovelSchema.index({ contentClass: 1, status: 1 });
+NovelSchema.index({ moods: 1, subgenres: 1 });
+NovelSchema.index({ themes: 1 });
 
 export const Novel: Model<INovel> =
   mongoose.models.Novel || mongoose.model<INovel>("Novel", NovelSchema);

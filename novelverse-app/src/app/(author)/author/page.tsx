@@ -42,17 +42,29 @@ export default function AuthorStudioPage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <Link href="/author/import">
-                <Button variant="outline" className="border-white/10 hover:border-violet-500/50 bg-zinc-900 text-white text-xs font-semibold rounded-xl px-4 h-11 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-violet-400" />
-                  Novel Ingestion Studio
+            <div className="flex flex-wrap items-center gap-2.5">
+              <Link href="/author/studio-editor">
+                <Button className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl px-4 h-10 shadow-lg shadow-violet-600/30 flex items-center gap-1.5">
+                  <Plus className="w-4 h-4" />
+                  Studio Editor
+                </Button>
+              </Link>
+              <Link href="/author/story-bible">
+                <Button variant="outline" className="border-white/10 hover:border-violet-500/50 bg-zinc-900 text-white text-xs font-semibold rounded-xl px-3.5 h-10 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+                  Story Bible
+                </Button>
+              </Link>
+              <Link href="/author/analytics">
+                <Button variant="outline" className="border-white/10 hover:border-violet-500/50 bg-zinc-900 text-white text-xs font-semibold rounded-xl px-3.5 h-10 flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-emerald-400" />
+                  Analytics
                 </Button>
               </Link>
               <Link href="/author/import">
-                <Button className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white text-xs font-semibold rounded-xl px-5 h-11 shadow-lg shadow-violet-600/30 flex items-center gap-2">
-                  <Plus className="w-4 h-4" />
-                  Import / Publish
+                <Button variant="outline" className="border-white/10 hover:border-white/20 bg-zinc-900 text-zinc-300 hover:text-white text-xs font-semibold rounded-xl px-3.5 h-10 flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5 text-blue-400" />
+                  Ingest Work
                 </Button>
               </Link>
             </div>

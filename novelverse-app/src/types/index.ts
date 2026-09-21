@@ -58,6 +58,10 @@ export interface AuthorDisplay {
   followersCount?: number;
 }
 
+/* ── Content Classification & Format ─────────────────────── */
+export type ContentClass = "COMMUNITY" | "STUDIO_ORIGINAL" | "PUBLIC_DOMAIN" | "LICENSED";
+export type NovelFormat = "STANDARD" | "ENHANCED" | "CINEMATIC" | "AUDIO";
+
 /* ── Novel Card (display) ────────────────────────────────── */
 export interface NovelCardData {
   id: string;
@@ -66,6 +70,10 @@ export interface NovelCardData {
   coverUrl?: string;
   author: AuthorDisplay;
   genres: Genre[];
+  subgenres?: string[];
+  themes?: string[];
+  tropes?: string[];
+  moods?: string[];
   status: NovelStatus;
   rating: number;          // 0–5
   reviewCount: number;
@@ -74,6 +82,10 @@ export interface NovelCardData {
   wordCount?: number;
   isPremium?: boolean;
   isCompleted?: boolean;
+  contentClass?: ContentClass;
+  novelFormat?: NovelFormat;
+  aiAssisted?: boolean;
+  aiAssistedLabel?: string;
   updatedAt: string;       // ISO date string
   synopsis?: string;
 }
@@ -173,6 +185,11 @@ export type SortOption =
 
 export interface NovelFilters {
   genre?: string;
+  subgenre?: string;
+  trope?: string;
+  mood?: string;
+  contentClass?: ContentClass;
+  novelFormat?: NovelFormat;
   status?: NovelStatus;
   sort?: SortOption;
   search?: string;

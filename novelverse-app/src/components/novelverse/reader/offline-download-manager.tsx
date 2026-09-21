@@ -15,6 +15,11 @@ import {
   getOfflineNovels,
   removeOfflineNovel,
 } from "@/lib/reader-storage";
+import {
+  saveChapterOfflineIDB,
+  isChapterOfflineIDB,
+  flushOfflineReadingQueue,
+} from "@/lib/offline-sync-engine";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -44,10 +49,23 @@ export function OfflineDownloadButton({
   const [isOnline, setIsOnline] = React.useState(true);
 
   React.useEffect(() => {
-    setIsDownloaded(isChapterOffline(novel.slug, chapter.chapterNumber));
+    let mounted = true;
+    async function checkOffline() {
+      const offlineInIDB = await isChapterOfflineIDB(novel.slug, chapter.chapterNumber);
+      const offlineInStorage = isChapterOffline(novel.slug, chapter.chapterNumber);
+      if (mounted) {
+        setIsDownloaded(offlineInIDB || offlineInStorage);
+      }
+    }
+    checkOffline();
 
     const updateOnlineStatus = () => {
-      setIsOnline(navigator.onLine);
+      const online = navigator.onLine;
+      setIsOnline(online);
+      if (online) {
+        // Auto flush queued progress when reconnecting
+        flushOfflineReadingQueue().catch(() => {});
+      }
     };
 
     window.addEventListener("online", updateOnlineStatus);
@@ -55,15 +73,26 @@ export function OfflineDownloadButton({
     setIsOnline(navigator.onLine);
 
     return () => {
+      mounted = false;
       window.removeEventListener("online", updateOnlineStatus);
       window.removeEventListener("offline", updateOnlineStatus);
     };
   }, [novel.slug, chapter.chapterNumber]);
 
-  const handleDownload = () => {
-    saveChapterOffline(novel, chapter);
-    setIsDownloaded(true);
-    toast.success(`Chapter ${chapter.chapterNumber} saved for offline reading! (Module 40)`);
+  const handleDownload = async () => {
+    try {
+      // Save in high-capacity IndexedDB
+      await saveChapterOfflineIDB(novel, chapter);
+      // Also write to reader-storage for fast synchronous lookups
+      saveChapterOffline(novel, chapter);
+      setIsDownloaded(true);
+      toast.success(`Chapter ${chapter.chapterNumber} saved for offline reading! (IndexedDB)`);
+    } catch {
+      // Fallback to storage
+      saveChapterOffline(novel, chapter);
+      setIsDownloaded(true);
+      toast.success(`Chapter ${chapter.chapterNumber} saved for offline reading!`);
+    }
   };
 
   return (
